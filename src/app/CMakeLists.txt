@@ -232,7 +232,6 @@ SET(QGIS_APP_SRCS
   locator/qgslocatoroptionswidget.cpp
 
   gps/qgsgpsinformationwidget.cpp
-  gps/qgsgpsmarker.cpp
 
   dwg/qgsdwgimportdialog.cpp
   dwg/qgsdwgimporter.cpp
