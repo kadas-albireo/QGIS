@@ -1780,6 +1780,7 @@ void QgsMapCanvas::unsetMapTool( QgsMapTool *tool )
 {
   if ( mMapTool && mMapTool == tool )
   {
+    disconnect( mMapTool, &QObject::destroyed, this, &QgsMapCanvas::mapToolDestroyed );
     mMapTool->deactivate();
     mMapTool = nullptr;
     emit mapToolSet( nullptr, mMapTool );
