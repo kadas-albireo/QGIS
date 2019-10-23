@@ -611,6 +611,19 @@ class CORE_EXPORT QgsRenderContext
      */
     bool hasRenderedFeatureHandlers() const { return mHasRenderedFeatureHandlers; }
 
+    /**
+     * Set arbitrary custom flags which consumers might honour to adapt their rendering.
+     * \param flags
+     * \since QGIS 3.10
+     */
+    void setCustomRenderFlags( const QStringList &flags ) { mCustomRenderFlags = flags; }
+
+    /**
+     * Returns a list of custom flags which consumers might honour to adapt their rendering.
+     * \since QGIS 3.10
+     */
+    const QStringList &customRenderFlags() const { return mCustomRenderFlags; }
+
   private:
 
     Flags mFlags;
@@ -675,6 +688,8 @@ class CORE_EXPORT QgsRenderContext
 #ifdef QGISDEBUG
     bool mHasTransformContext = false;
 #endif
+
+    QStringList mCustomRenderFlags;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS( QgsRenderContext::Flags )
