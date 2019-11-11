@@ -121,6 +121,11 @@ QgsLayout *QgsAppLayoutDesignerInterface::layout()
   return mDesigner->currentLayout();
 }
 
+void QgsAppLayoutDesignerInterface::setCurrentLayout( QgsLayout *layout )
+{
+  return mDesigner->setCurrentLayout( layout );
+}
+
 QgsMasterLayoutInterface *QgsAppLayoutDesignerInterface::masterLayout()
 {
   return mDesigner->masterLayout();
@@ -246,6 +251,21 @@ void QgsAppLayoutDesignerInterface::close()
 void QgsAppLayoutDesignerInterface::showRulers( bool visible )
 {
   mDesigner->showRulers( visible );
+}
+
+void QgsAppLayoutDesignerInterface::setSectionTitle( const QString &title )
+{
+  return mDesigner->setSectionTitle( title );
+}
+
+QgsLayoutGuideWidget *QgsAppLayoutDesignerInterface::guideWidget()
+{
+  return mDesigner->guideWidget();
+}
+
+void QgsAppLayoutDesignerInterface::showGuideDock( bool show )
+{
+  mDesigner->showGuideDock( show );
 }
 
 
@@ -766,7 +786,7 @@ QgsLayoutDesignerDialog::QgsLayoutDesignerDialog( QWidget *parent, Qt::WindowFla
 
   connect( mActionToggleFullScreen, &QAction::toggled, this, &QgsLayoutDesignerDialog::toggleFullScreen );
 
-  mMenuProvider = new QgsLayoutAppMenuProvider( this );
+  mMenuProvider = new QgsLayoutAppMenuProvider( iface() );
   mView->setMenuProvider( mMenuProvider );
 
   int minDockWidth( fontMetrics().width( QStringLiteral( "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" ) ) );
@@ -812,7 +832,7 @@ QgsLayoutDesignerDialog::QgsLayoutDesignerDialog( QWidget *parent, Qt::WindowFla
   mPanelsMenu->addAction( mItemsDock->toggleViewAction() );
 
   //items tree widget
-  mItemsTreeView = new QgsLayoutItemsListView( mItemsDock, this );
+  mItemsTreeView = new QgsLayoutItemsListView( mItemsDock, iface() );
   mItemsDock->setWidget( mItemsTreeView );
 
   mAtlasDock = new QgsDockWidget( tr( "Atlas" ), this );
@@ -3847,7 +3867,7 @@ void QgsLayoutDesignerDialog::createAtlasWidget()
 void QgsLayoutDesignerDialog::createReportWidget()
 {
   QgsReport *report = dynamic_cast< QgsReport * >( mMasterLayout );
-  QgsReportOrganizerWidget *reportWidget = new QgsReportOrganizerWidget( mReportDock, this, report );
+  QgsReportOrganizerWidget *reportWidget = new QgsReportOrganizerWidget( mReportDock, iface(), report );
   reportWidget->setMessageBar( mMessageBar );
   mReportDock->setWidget( reportWidget );
   mReportToolbar->show();
