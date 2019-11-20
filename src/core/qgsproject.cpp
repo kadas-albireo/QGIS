@@ -930,7 +930,7 @@ void QgsProject::setSnappingConfig( const QgsSnappingConfig &snappingConfig )
   emit snappingConfigChanged( mSnappingConfig );
 }
 
-bool QgsProject::_getMapLayers( const QDomDocument &doc, QList<QDomNode> &brokenNodes, QgsProject::ReadFlags flags )
+bool QgsProject::_getMapLayers( const QDomDocument &doc, QList<QDomNode> &brokenNodes, QStringList &failedLayers, QgsProject::ReadFlags flags )
 {
   // Layer order is set by the restoring the legend settings from project file.
   // This is done on the 'readProject( ... )' signal
@@ -966,7 +966,8 @@ bool QgsProject::_getMapLayers( const QDomDocument &doc, QList<QDomNode> &broken
   {
     const QDomElement element = node.toElement();
 
-    const QString name = translate( QStringLiteral( "project:layers:%1" ).arg( node.namedItem( QStringLiteral( "id" ) ).toElement().text() ), node.namedItem( QStringLiteral( "layername" ) ).toElement().text() );
+    QString layerId = node.namedItem( QStringLiteral( "id" ) ).toElement().text();
+    const QString name = translate( QStringLiteral( "project:layers:%1" ).arg( layerId ), node.namedItem( QStringLiteral( "layername" ) ).toElement().text() );
     if ( !name.isNull() )
       emit loadingLayer( tr( "Loading layer %1" ).arg( name ) );
 
@@ -983,6 +984,10 @@ bool QgsProject::_getMapLayers( const QDomDocument &doc, QList<QDomNode> &broken
 
       if ( !addLayer( element, brokenNodes, context, flags ) )
       {
+        if ( !mapLayer( layerId ) )
+        {
+          failedLayers.append( layerId );
+        }
         returnStatus = false;
       }
       const auto messages = context.takeMessages();
@@ -1003,6 +1008,9 @@ bool QgsProject::addLayer( const QDomElement &layerElem, QList<QDomNode> &broken
   QString type = layerElem.attribute( QStringLiteral( "type" ) );
   QgsDebugMsgLevel( "Layer type is " + type, 4 );
   std::unique_ptr<QgsMapLayer> mapLayer;
+
+  const QString layerId { layerElem.namedItem( QStringLiteral( "id" ) ).toElement().text() };
+  Q_ASSERT( ! layerId.isEmpty() );
 
   if ( type == QLatin1String( "vector" ) )
   {
@@ -1037,8 +1045,6 @@ bool QgsProject::addLayer( const QDomElement &layerElem, QList<QDomNode> &broken
 
   // This is tricky: to avoid a leak we need to check if the layer was already in the store
   // because if it was, the newly created layer will not be added to the store and it would leak.
-  const QString layerId { layerElem.namedItem( QStringLiteral( "id" ) ).toElement().text() };
-  Q_ASSERT( ! layerId.isEmpty() );
   const bool layerWasStored { layerStore()->mapLayer( layerId ) != nullptr };
 
   // have the layer restore state that is stored in Dom node
@@ -1394,7 +1400,8 @@ bool QgsProject::readProjectFile( const QString &filename, QgsProject::ReadFlags
 
   // get the map layers
   QList<QDomNode> brokenNodes;
-  bool clean = _getMapLayers( *doc, brokenNodes, flags );
+  QStringList failedLayers;
+  bool clean = _getMapLayers( *doc, brokenNodes, failedLayers, flags );
 
   // review the integrity of the retrieved map layers
   if ( !clean )
@@ -1420,6 +1427,9 @@ bool QgsProject::readProjectFile( const QString &filename, QgsProject::ReadFlags
   }
 
   mLayerTreeRegistryBridge->setEnabled( true );
+
+  // Ensure layer tree nodes of failed layers are removed
+  emit layersWillBeRemoved( failedLayers );
 
   // load embedded groups and layers
   loadEmbeddedNodes( mRootGroup, flags );
