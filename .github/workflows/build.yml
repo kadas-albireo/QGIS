@@ -23,7 +23,7 @@ jobs:
           for file in $(find $distroot -name '*.debug' \( -type l -or -type f \)); do
               dest=${file/$distroot/$debugroot}
               mkdir -p "$(dirname $dest)"
-              mv "$file" "$dest"
+              sudo mv "$file" "$dest"
           done
           (cd $distroot && zip -r - *) > qgis-portable-win64.zip
           (cd $debugroot && zip -r - *) > qgis-portable-win64-debugsym.zip
