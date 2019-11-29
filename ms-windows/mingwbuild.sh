@@ -105,6 +105,9 @@ mkdir -p $builddir
 
 mingw$bits-make -C$builddir -j$njobs DESTDIR="${installroot}" install VERBOSE=1
 
+# Remove plugins with missing dependencies
+rm -rf ${installroot}/share/qgis/python/plugins/{MetaSearch,processing}
+
 # Strip debuginfo
 binaries=$(find $installprefix -name '*.exe' -or -name '*.dll' -or -name '*.pyd')
 for f in $binaries
