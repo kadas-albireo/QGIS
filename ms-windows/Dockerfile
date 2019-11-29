@@ -6,6 +6,7 @@ MAINTAINER Sandro Mani <manisandro@gmail.com>
 
 RUN \
 echo all > /etc/rpm/macros.image-language-conf && \
+rm -f /etc/yum.repos.d/*modular* && \
 dnf install -y 'dnf-command(config-manager)' && \
 dnf config-manager --add-repo https://copr.fedorainfracloud.org/coprs/smani/mingw-extras/repo/fedora-rawhide/smani-mingw-extras-fedora-rawhide.repo && \
 dnf install -y \
@@ -24,6 +25,7 @@ dnf install -y \
   mingw64-postgresql \
   mingw64-proj \
   mingw64-python3 \
+  mingw64-python3-lxml \
   mingw64-python3-OWSLib \
   mingw64-python3-pyyaml \
   mingw64-python3-qscintilla-qt5 \
