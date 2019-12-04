@@ -25,7 +25,6 @@ dnf install -y \
   mingw64-postgresql \
   mingw64-proj \
   mingw64-python3 \
-  mingw64-python3-dateutil \
   mingw64-python3-flask \
   mingw64-python3-gdal \
   mingw64-python3-GeographicLib \
