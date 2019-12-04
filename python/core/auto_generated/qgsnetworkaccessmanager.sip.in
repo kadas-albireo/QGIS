@@ -12,6 +12,23 @@
 
 
 
+class QgsNetworkCookieJar : QNetworkCookieJar
+{
+%Docstring
+Cookie jar for QgsNetworkAccessManager.
+
+.. versionadded:: 3.12
+%End
+
+%TypeHeaderCode
+#include "qgsnetworkaccessmanager.h"
+%End
+  public:
+    QgsNetworkCookieJar( QObject *parent );
+    QList<QNetworkCookie> allCookies() const;
+    void setAllCookies( const QList<QNetworkCookie> &cookieList );
+};
+
 class QgsNetworkRequestParameters
 {
 %Docstring
@@ -456,6 +473,17 @@ See QgsSslErrorHandler for details on how to handle SSL errors and potentially i
 
     void requestTimedOut( QNetworkReply * );
 
+
+    void cookieAdded( QByteArray cookie, QUrl url );
+%Docstring
+Emitted when a cookie is added.
+
+The ``cookie`` argument is the cookie contents.
+
+The ``url`` argument is the url for which the cookie is added.
+
+.. versionadded:: 3.12
+%End
 
 
   protected:
