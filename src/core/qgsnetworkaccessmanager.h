@@ -23,6 +23,8 @@
 #include "qgis_sip.h"
 #include <QStringList>
 #include <QNetworkAccessManager>
+#include <QNetworkCookie>
+#include <QNetworkCookieJar>
 #include <QNetworkProxy>
 #include <QNetworkRequest>
 #include <QMutex>
@@ -41,6 +43,20 @@ constexpr int sFilePrefixLength = CMAKE_SOURCE_DIR[sizeof( CMAKE_SOURCE_DIR ) - 
 #define QgsSetRequestInitiatorClass(request, _class) request.setAttribute( static_cast< QNetworkRequest::Attribute >( QgsNetworkRequestParameters::AttributeInitiatorClass ), _class ); request.setAttribute( static_cast< QNetworkRequest::Attribute >( QgsNetworkRequestParameters::AttributeInitiatorRequestId ), QString( __FILE__ ).mid( sFilePrefixLength ) + ':' + QString::number( __LINE__ ) + " (" + __FUNCTION__ + ")" );
 #define QgsSetRequestInitiatorId(request, str) request.setAttribute( static_cast< QNetworkRequest::Attribute >( QgsNetworkRequestParameters::AttributeInitiatorRequestId ), QString( __FILE__ ).mid( sFilePrefixLength ) + ':' + QString::number( __LINE__ ) + " (" + __FUNCTION__ + "): " + str );
 #endif
+
+/**
+ * \class QgsNetworkCookieJar
+ * \ingroup core
+ * Cookie jar for QgsNetworkAccessManager.
+ * \since QGIS 3.12
+ */
+class CORE_EXPORT QgsNetworkCookieJar : public QNetworkCookieJar
+{
+  public:
+    QgsNetworkCookieJar( QObject *parent ) : QNetworkCookieJar( parent ) {}
+    QList<QNetworkCookie> allCookies() const { return QNetworkCookieJar::allCookies(); }
+    void setAllCookies( const QList<QNetworkCookie> &cookieList ) { QNetworkCookieJar::setAllCookies( cookieList ); }
+};
 
 /**
  * \class QgsNetworkRequestParameters
@@ -616,6 +632,17 @@ class CORE_EXPORT QgsNetworkAccessManager : public QNetworkAccessManager
 ///@endcond
 #endif
 
+    /**
+     * Emitted when a cookie is added.
+     *
+     * The \a cookie argument is the cookie contents.
+     *
+     * The \a url argument is the url for which the cookie is added.
+     *
+     * \since QGIS 3.12
+     */
+    void cookieAdded( QByteArray cookie, QUrl url );
+
 
   private slots:
     void abortRequest();
@@ -631,6 +658,8 @@ class CORE_EXPORT QgsNetworkAccessManager : public QNetworkAccessManager
 
     void onAuthRequired( QNetworkReply *reply, QAuthenticator *auth );
     void handleAuthRequest( QNetworkReply *reply, QAuthenticator *auth );
+
+    void addCookie( const QByteArray &cookie, const QUrl &url );
 
   protected:
     QNetworkReply *createRequest( QNetworkAccessManager::Operation op, const QNetworkRequest &req, QIODevice *outgoingData = nullptr ) override;
@@ -661,6 +690,7 @@ class CORE_EXPORT QgsNetworkAccessManager : public QNetworkAccessManager
     QMutex mSslErrorHandlerMutex;
     // only in use by worker threads, unused in main thread
     QWaitCondition mSslErrorWaitCondition;
+    QMutex mCookieLock;
 
     // auth request handler, will be set for main thread ONLY
     std::unique_ptr< QgsNetworkAuthenticationHandler > mAuthHandler;
