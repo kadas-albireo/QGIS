@@ -45,7 +45,7 @@ jobs:
         id: create_release
         uses: actions/create-release@v1.0.0
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_CI_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_PRIVATE_TOKEN }}
         with:
           tag_name: ${{ steps.version_number.outputs.version }}
           release_name: CI Build
@@ -54,7 +54,7 @@ jobs:
       - name: Upload release asset
         uses: actions/upload-release-asset@v1.0.1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_CI_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_PRIVATE_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./qgis-portable-win64.zip
@@ -63,7 +63,7 @@ jobs:
       - name: Upload debugsym release asset
         uses: actions/upload-release-asset@v1.0.1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_CI_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_PRIVATE_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./qgis-portable-win64-debugsym.zip
@@ -71,5 +71,6 @@ jobs:
           asset_content_type: application/zip
       - name: Delete previous release
         run: |
-          curl -s -H "authorization: Bearer ${{ secrets.GITHUB_CI_TOKEN }}" \
+          curl -s -H "authorization: Bearer ${{ secrets.GITHUB_PRIVATE_TOKEN }}" \
                -X DELETE ${{ steps.version_number.outputs.prev_release }}
+        if: steps.version_number.outputs.prev_release != ''
