@@ -7,8 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: build kadas2-mingw-buildenv
-        run: docker build -t kadas2-mingw-buildenv ms-windows
       - name: Version number
         id: version_number
         run: |
@@ -27,6 +25,10 @@ jobs:
           fi
           echo "##[set-output name=version;]$VERSION"
           echo "##[set-output name=prev_release;]$PREV_RELEASE"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_PRIVATE_TOKEN }}
+      - name: build kadas2-mingw-buildenv
+        run: docker build -t kadas2-mingw-buildenv ms-windows
       - name: Build application
         run: docker run -v $PWD:/workspace kadas2-mingw-buildenv ms-windows/mingwbuild.sh x86_64 nodebug 4
       - name: Create portable zip
@@ -45,6 +47,7 @@ jobs:
         id: create_release
         uses: actions/create-release@v1.0.0
         env:
+          # We use a personal access token, because GITHUB_CI_TOKEN is valid only for one hour
           GITHUB_TOKEN: ${{ secrets.GITHUB_PRIVATE_TOKEN }}
         with:
           tag_name: ${{ steps.version_number.outputs.version }}
