@@ -18,6 +18,7 @@ jobs:
             # Reset ci-latest tag
             git config --global user.email "ci@github.com"
             git config --global user.name "Github CI"
+            git remote set-url origin https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git
             git tag -d $VERSION || true
             git push origin :$VERSION || true
             git tag -m $VERSION $VERSION
@@ -25,8 +26,6 @@ jobs:
           fi
           echo "##[set-output name=version;]$VERSION"
           echo "##[set-output name=prev_release;]$PREV_RELEASE"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_CI_TOKEN }}
       - name: build kadas2-mingw-buildenv
         run: docker build -t kadas2-mingw-buildenv ms-windows
       - name: Build application
