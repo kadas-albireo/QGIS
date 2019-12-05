@@ -26,6 +26,8 @@ jobs:
           fi
           echo "##[set-output name=version;]$VERSION"
           echo "##[set-output name=prev_release;]$PREV_RELEASE"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: build kadas2-mingw-buildenv
         run: docker build -t kadas2-mingw-buildenv ms-windows
       - name: Build application
