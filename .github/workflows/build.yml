@@ -20,6 +20,8 @@ jobs:
             # Reset ci-latest tag
             git config --global user.email "ci@github.com"
             git config --global user.name "Github CI"
+            # Workaround for "could not read Username for 'https://github.com': No such device or address"
+            git remote set-url origin https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git
             git tag -d $VERSION || true
             git push origin :$VERSION || true
             git tag -m $VERSION $VERSION
@@ -27,6 +29,8 @@ jobs:
           fi
           echo "##[set-output name=version;]$VERSION"
           echo "##[set-output name=prev_release;]$PREV_RELEASE"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Build application
         run: docker run -v $PWD:/workspace kadas2-mingw-buildenv ms-windows/mingwbuild.sh x86_64 nodebug 4
       - name: Create portable zip
@@ -45,7 +49,8 @@ jobs:
         id: create_release
         uses: actions/create-release@v1.0.0
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_CI_TOKEN }}
+          # We use a personal access token, because GITHUB_CI_TOKEN is valid only for one hour
+          GITHUB_TOKEN: ${{ secrets.GITHUB_PRIVATE_TOKEN }}
         with:
           tag_name: ${{ steps.version_number.outputs.version }}
           release_name: CI Build
@@ -54,7 +59,7 @@ jobs:
       - name: Upload release asset
         uses: actions/upload-release-asset@v1.0.1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_CI_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_PRIVATE_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./qgis-portable-win64.zip
@@ -63,7 +68,7 @@ jobs:
       - name: Upload debugsym release asset
         uses: actions/upload-release-asset@v1.0.1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_CI_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_PRIVATE_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./qgis-portable-win64-debugsym.zip
@@ -71,5 +76,6 @@ jobs:
           asset_content_type: application/zip
       - name: Delete previous release
         run: |
-          curl -s -H "authorization: Bearer ${{ secrets.GITHUB_CI_TOKEN }}" \
+          curl -s -H "authorization: Bearer ${{ secrets.GITHUB_PRIVATE_TOKEN }}" \
                -X DELETE ${{ steps.version_number.outputs.prev_release }}
+        if: steps.version_number.outputs.prev_release != ''
