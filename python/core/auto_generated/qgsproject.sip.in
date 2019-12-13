@@ -1618,6 +1618,13 @@ Emitted when the project dirty status changes.
 .. versionadded:: 3.2
 %End
 
+    void dirtySet();
+%Docstring
+Emitted when the QgsProject.setDirty(true) is called.
+
+.. versionadded:: 3.12
+%End
+
 
  void mapScalesChanged() /Deprecated/;
 %Docstring
