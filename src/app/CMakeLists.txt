@@ -70,7 +70,6 @@ SET(QGIS_APP_SRCS
   qgslayertreeviewbadlayerindicator.cpp
   qgsmapcanvasdockwidget.cpp
   qgsmaplayerstylecategoriesmodel.cpp
-  qgsmaplayerstyleguiutils.cpp
   qgsmapsavedialog.cpp
   qgsprojectlistitemdelegate.cpp
   qgspuzzlewidget.cpp
@@ -155,7 +154,6 @@ SET(QGIS_APP_SRCS
   qgsprojectlayergroupdialog.cpp
   qgsprojectproperties.cpp
   qgsrastercalcdialog.cpp
-  qgsrasterlayerproperties.cpp
   qgsrelationmanagerdialog.cpp
   qgsrelationadddlg.cpp
   qgsselectbyformdialog.cpp
@@ -283,7 +281,6 @@ SET (QGIS_APP_MOC_HDRS
   qgslayertreeviewbadlayerindicator.h
   qgsmapcanvasdockwidget.h
   qgsmaplayerstylecategoriesmodel.h
-  qgsmaplayerstyleguiutils.h
   qgsmapsavedialog.h
   qgspuzzlewidget.h
   qgsprojectlistitemdelegate.h
@@ -389,7 +386,6 @@ SET (QGIS_APP_MOC_HDRS
   qgsprojectlayergroupdialog.h
   qgsprojectproperties.h
   qgsrastercalcdialog.h
-  qgsrasterlayerproperties.h
   qgsrelationmanagerdialog.h
   qgsrelationadddlg.h
   qgsselectbyformdialog.h
