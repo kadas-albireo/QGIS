@@ -4,6 +4,7 @@ SET(QGIS_GUI_SRCS
   raster/qgspalettedrendererwidget.cpp
   raster/qgsrasterbandcombobox.cpp
   raster/qgsrasterhistogramwidget.cpp
+  raster/qgsrasterlayerproperties.cpp
   raster/qgsrasterminmaxwidget.cpp
   raster/qgsrasterrendererwidget.cpp
   raster/qgssinglebandgrayrendererwidget.cpp
@@ -364,6 +365,7 @@ SET(QGIS_GUI_SRCS
   qgsmaplayeractionregistry.cpp
   qgsmaplayercombobox.cpp
   qgsmaplayerconfigwidgetfactory.cpp
+  qgsmaplayerstyleguiutils.cpp
   qgsmaplayerstylemanagerwidget.cpp
   qgsmapmouseevent.cpp
   qgsmapoverviewcanvas.cpp
@@ -551,6 +553,7 @@ SET(QGIS_GUI_MOC_HDRS
   qgsmapcanvastracer.h
   qgsmaplayeractionregistry.h
   qgsmaplayercombobox.h
+  qgsmaplayerstyleguiutils.h
   qgsmaplayerstylemanagerwidget.h
   qgsmapoverviewcanvas.h
   qgsmaptip.h
@@ -651,6 +654,7 @@ SET(QGIS_GUI_MOC_HDRS
   raster/qgsrasterrendererwidget.h
   raster/qgssinglebandgrayrendererwidget.h
   raster/qgssinglebandpseudocolorrendererwidget.h
+  raster/qgsrasterlayerproperties.h
   raster/qgsrendererrasterpropertieswidget.h
   raster/qgsrastertransparencywidget.h
   raster/qgshillshaderendererwidget.h
@@ -1045,6 +1049,7 @@ SET(QGIS_GUI_UI_HDRS
   ${CMAKE_CURRENT_BINARY_DIR}/../ui/ui_qgsowssourceselectbase.h
   ${CMAKE_CURRENT_BINARY_DIR}/../ui/ui_qgsarcgisservicesourceselectbase.h
   ${CMAKE_CURRENT_BINARY_DIR}/../ui/ui_qgsprojectionselectorbase.h
+  ${CMAKE_CURRENT_BINARY_DIR}/../ui/ui_qgsrasterlayerpropertiesbase.h
   ${CMAKE_CURRENT_BINARY_DIR}/../ui/ui_qgsquerybuilderbase.h
   ${CMAKE_CURRENT_BINARY_DIR}/../ui/ui_qgssqlcomposerdialogbase.h
   ${CMAKE_CURRENT_BINARY_DIR}/../ui/ui_qgssublayersdialogbase.h
@@ -1059,6 +1064,7 @@ SET(QGIS_GUI_UI_HDRS
   ${CMAKE_CURRENT_BINARY_DIR}/../ui/ui_qgspdfexportoptions.h
   ${CMAKE_CURRENT_BINARY_DIR}/../ui/ui_qgslayoutwidgetbase.h
   ${CMAKE_CURRENT_BINARY_DIR}/../ui/ui_qgsrenderercontainerbase.h
+  ${CMAKE_CURRENT_BINARY_DIR}/../ui/ui_qgslayertreeembeddedconfigwidgetbase.h
 )
 
 SET(IMAGE_RCCS ../../images/images.qrc)
@@ -1086,6 +1092,7 @@ INCLUDE_DIRECTORIES(
   ${CMAKE_SOURCE_DIR}/src/gui/processing
   ${CMAKE_SOURCE_DIR}/src/gui/providers/gdal
   ${CMAKE_SOURCE_DIR}/src/gui/providers/ogr
+  ${CMAKE_SOURCE_DIR}/src/gui/raster
   ${CMAKE_SOURCE_DIR}/src/core
   ${CMAKE_SOURCE_DIR}/src/core/annotations
   ${CMAKE_SOURCE_DIR}/src/core/auth

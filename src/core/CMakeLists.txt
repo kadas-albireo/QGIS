@@ -747,6 +747,7 @@ SET(QGIS_CORE_MOC_HDRS
   qgsvectorsimplifymethod.h
   qgsvectorlayerserverproperties.h
   qgsmapthemecollection.h
+  qgswebframe.h
   qgswebpage.h
   qgswebview.h
   qgssettings.h

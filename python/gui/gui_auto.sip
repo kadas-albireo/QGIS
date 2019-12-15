@@ -14,6 +14,7 @@
 %Include auto_generated/qgsmapcanvassnappingutils.sip
 %Include auto_generated/qgsmapcanvastracer.sip
 %Include auto_generated/qgsmaplayerconfigwidgetfactory.sip
+%Include auto_generated/qgsmaplayerstyleguiutils.sip
 %Include auto_generated/qgsmapmouseevent.sip
 %Include auto_generated/qgsmaptip.sip
 %Include auto_generated/qgssnapindicator.sip
@@ -237,6 +238,7 @@
 %Include auto_generated/raster/qgsrasterminmaxwidget.sip
 %Include auto_generated/raster/qgssinglebandgrayrendererwidget.sip
 %Include auto_generated/raster/qgssinglebandpseudocolorrendererwidget.sip
+%Include auto_generated/raster/qgsrasterlayerproperties.sip
 %Include auto_generated/raster/qgsrendererrasterpropertieswidget.sip
 %Include auto_generated/raster/qgsrastertransparencywidget.sip
 %Include auto_generated/raster/qgshillshaderendererwidget.sip
