@@ -55,7 +55,7 @@ class GUI_EXPORT QgsGeoPdfLayerTreeModel : public QgsLayerTreeModel
 
 
 ///@cond PRIVATE
-class APP_EXPORT QgsGeoPdfLayerFilteredTreeModel : public QSortFilterProxyModel
+class GUI_EXPORT QgsGeoPdfLayerFilteredTreeModel : public QSortFilterProxyModel
 {
   public:
 

@@ -7,11 +7,6 @@ SET(QGIS_APP_SRCS
   ${CMAKE_SOURCE_DIR}/external/nmea/gmath.c
   ${CMAKE_SOURCE_DIR}/external/nmea/time.c
 
-  attributeformconfig/qgsattributeformcontaineredit.cpp
-  attributeformconfig/qgsattributerelationedit.cpp
-  attributeformconfig/qgsattributetypedialog.cpp
-  attributeformconfig/qgsattributewidgetedit.cpp
-
   qgisapp.cpp
   qgisappinterface.cpp
   qgisappstylesheet.cpp
@@ -22,16 +17,9 @@ SET(QGIS_APP_SRCS
   qgsappcoordinateoperationhandlers.cpp
   qgsapplayertreeviewmenuprovider.cpp
   qgsappwindowmanager.cpp
-  qgsaddattrdialog.cpp
-  qgsaddtaborgroup.cpp
   qgsappscreenshots.cpp
-  qgsjoindialog.cpp
-  qgswmsdimensiondialog.cpp
   qgsannotationwidget.cpp
   qgsappsslerrorhandler.cpp
-  qgsattributeactiondialog.cpp
-  qgsattributeactionpropertiesdialog.cpp
-  qgsattributesforminitcode.cpp
   qgsattributetabledialog.cpp
   qgsbookmarks.cpp
   qgsbookmarkeditordialog.cpp
@@ -45,21 +33,15 @@ SET(QGIS_APP_SRCS
   qgsguivectorlayertools.cpp
   qgshtmlannotationdialog.cpp
   qgsdelattrdialog.cpp
-  qgsdiagramproperties.cpp
   qgsdisplayangle.cpp
-  qgsfieldcalculator.cpp
   qgsfirstrundialog.cpp
   qgsgeometryvalidationservice.cpp
   qgsgeometryvalidationdock.cpp
   qgsgeometryvalidationmodel.cpp
-  qgssourcefieldsproperties.cpp
-  qgsattributesformproperties.cpp
   qgsidentifyresultsdialog.cpp
   qgsinstallgridshiftdialog.cpp
   qgsfeatureaction.cpp
   qgslabelpropertydialog.cpp
-  qgslabelengineconfigdialog.cpp
-  qgslabelingwidget.cpp
   qgslayercapabilitiesmodel.cpp
   qgslayertreeviewindicatorprovider.cpp
   qgslayertreeviewembeddedindicator.cpp
@@ -69,21 +51,19 @@ SET(QGIS_APP_SRCS
   qgslayertreeviewnonremovableindicator.cpp
   qgslayertreeviewbadlayerindicator.cpp
   qgsmapcanvasdockwidget.cpp
-  qgsmaplayerstylecategoriesmodel.cpp
   qgsmapsavedialog.cpp
   qgsprojectlistitemdelegate.cpp
   qgspuzzlewidget.cpp
   qgsversionmigration.cpp
-  qgsrulebasedlabelingwidget.cpp
   qgssnappinglayertreemodel.cpp
   qgssnappingwidget.cpp
   qgsstatusbarcoordinateswidget.cpp
   qgsstatusbarmagnifierwidget.cpp
   qgsstatusbarscalewidget.cpp
   qgstemplateprojectsmodel.cpp
-  qgsvectorlayerloadstyledialog.cpp
   qgsversioninfo.cpp
   qgsrecentprojectsitemsmodel.cpp
+  qgsvectorlayerdigitizingproperties.cpp
   qgswelcomepage.cpp
 
   qgsmaptooladdfeature.cpp
@@ -161,9 +141,6 @@ SET(QGIS_APP_SRCS
   qgstextannotationdialog.cpp
   qgssvgannotationdialog.cpp
   qgsundowidget.cpp
-  qgsvectorlayerlegendwidget.cpp
-  qgsvectorlayersavestyledialog.cpp
-  qgsvectorlayerproperties.cpp
   qgsmapthemes.cpp
   qgshandlebadlayers.cpp
   qgsmaptooladdcircularstring.cpp
@@ -230,19 +207,12 @@ SET (QGIS_APP_MOC_HDRS
   qgisappinterface.h
   qgisappstylesheet.h
   qgsabout.h
-  qgsaddattrdialog.h
   qgsalignrasterdialog.h
   qgsappbrowserproviders.h
   qgsappcoordinateoperationhandlers.h
   qgsappscreenshots.h
-  qgsjoindialog.h
-  qgswmsdimensiondialog.h
-  qgsaddtaborgroup.h
   qgsannotationwidget.h
   qgsapplayertreeviewmenuprovider.h
-  qgsattributeactiondialog.h
-  qgsattributeactionpropertiesdialog.h
-  qgsattributesforminitcode.h
   qgsattributetabledialog.h
   qgsbookmarks.h
   qgsbookmarkeditordialog.h
@@ -251,15 +221,11 @@ SET (QGIS_APP_MOC_HDRS
   qgscustomprojectiondialog.h
   qgsdatumtransformtablewidget.h
   qgsdelattrdialog.h
-  qgsdiagramproperties.h
   qgsdiscoverrelationsdialog.h
   qgsdisplayangle.h
   qgsdxfexportdialog.h
   qgsfeatureaction.h
-  qgsfieldcalculator.h
   qgsfirstrundialog.h
-  qgssourcefieldsproperties.h
-  qgsattributesformproperties.h
   qgsformannotationdialog.h
   qgsguivectorlayertools.h
   qgsgeometryvalidationservice.h
@@ -268,8 +234,6 @@ SET (QGIS_APP_MOC_HDRS
   qgshtmlannotationdialog.h
   qgsidentifyresultsdialog.h
   qgsinstallgridshiftdialog.h
-  qgslabelengineconfigdialog.h
-  qgslabelingwidget.h
   qgslabelpropertydialog.h
   qgslayercapabilitiesmodel.h
   qgslayertreeviewindicatorprovider.h
@@ -280,20 +244,18 @@ SET (QGIS_APP_MOC_HDRS
   qgslayertreeviewnonremovableindicator.h
   qgslayertreeviewbadlayerindicator.h
   qgsmapcanvasdockwidget.h
-  qgsmaplayerstylecategoriesmodel.h
   qgsmapsavedialog.h
   qgspuzzlewidget.h
   qgsprojectlistitemdelegate.h
-  qgsrulebasedlabelingwidget.h
   qgssnappinglayertreemodel.h
   qgssnappingwidget.h
   qgsstatusbarcoordinateswidget.h
   qgsstatusbarmagnifierwidget.h
   qgsstatusbarscalewidget.h
   qgstemplateprojectsmodel.h
-  qgsvectorlayerloadstyledialog.h
   qgsversioninfo.h
   qgsrecentprojectsitemsmodel.h
+  qgsvectorlayerdigitizingproperties.h
   qgswelcomepage.h
 
   qgsmaptooladdfeature.h
@@ -352,11 +314,6 @@ SET (QGIS_APP_MOC_HDRS
   qgsmaptoolregularpolygon2points.h
   qgsmaptoolregularpolygoncenterpoint.h
   qgsmaptoolregularpolygoncentercorner.h
-  
-  attributeformconfig/qgsattributetypedialog.h
-  attributeformconfig/qgsattributeformcontaineredit.h
-  attributeformconfig/qgsattributerelationedit.h
-  attributeformconfig/qgsattributewidgetedit.h
 
   decorations/qgsdecorationitem.h
   decorations/qgsdecorationtitle.h
@@ -393,9 +350,6 @@ SET (QGIS_APP_MOC_HDRS
   qgssvgannotationdialog.h
   qgstextannotationdialog.h
   qgsundowidget.h
-  qgsvectorlayerlegendwidget.h
-  qgsvectorlayersavestyledialog.h
-  qgsvectorlayerproperties.h
   qgsmapthemes.h
   qgshandlebadlayers.h
 
@@ -660,6 +614,7 @@ INCLUDE_DIRECTORIES(
   ${CMAKE_SOURCE_DIR}/src/gui/editorwidgets/core
   ${CMAKE_SOURCE_DIR}/src/gui/layertree
   ${CMAKE_SOURCE_DIR}/src/gui/locator
+  ${CMAKE_SOURCE_DIR}/src/gui/vector
   ${CMAKE_SOURCE_DIR}/src/plugins
   ${CMAKE_SOURCE_DIR}/src/python
   ${CMAKE_SOURCE_DIR}/src/native

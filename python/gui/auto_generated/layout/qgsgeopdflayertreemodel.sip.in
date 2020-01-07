@@ -46,6 +46,27 @@ the Free Software Foundation; either version 2 of the License, or     *
     virtual bool setData( const QModelIndex &index, const QVariant &value, int role );
 
 
+    void checkAll( bool checked, const QModelIndex &parent = QModelIndex() );
+%Docstring
+Checks (or unchecks) all rows and children from the specified ``parent`` index.
+%End
+
+};
+
+
+class QgsGeoPdfLayerFilteredTreeModel : QSortFilterProxyModel
+{
+
+%TypeHeaderCode
+#include "qgsgeopdflayertreemodel.h"
+%End
+  public:
+
+    QgsGeoPdfLayerFilteredTreeModel( QgsGeoPdfLayerTreeModel *sourceModel, QObject *parent = 0 );
+
+    virtual bool filterAcceptsRow( int source_row, const QModelIndex &source_parent ) const;
+
+
 };
 
 /************************************************************************
