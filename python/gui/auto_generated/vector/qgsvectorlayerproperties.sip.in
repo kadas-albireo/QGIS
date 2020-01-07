@@ -1,0 +1,120 @@
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/vector/qgsvectorlayerproperties.h                            *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/
+
+
+
+
+
+
+class QgsVectorLayerProperties : QgsOptionsDialogBase
+{
+%Docstring
+*************************************************************************
+
+This program is free software; you can redistribute it and/or modify  *
+it under the terms of the GNU General Public License as published by  *
+the Free Software Foundation; either version 2 of the License, or     *
+(at your option) any later version.                                   *
+
+**************************************************************************
+%End
+
+%TypeHeaderCode
+#include "qgsvectorlayerproperties.h"
+%End
+  public:
+    enum StyleType
+    {
+      QML,
+      SLD,
+      DB,
+    };
+
+    QgsVectorLayerProperties( QgsMapCanvas *canvas, QgsMessageBar *messageBar, QgsVectorLayer *lyr = 0, QWidget *parent = 0, Qt::WindowFlags fl = QgsGuiUtils::ModalDialogFlags );
+
+    QString displayName();
+%Docstring
+Returns the display name entered in the dialog
+%End
+
+    void addPropertiesPageFactory( QgsMapLayerConfigWidgetFactory *factory );
+%Docstring
+Adds a properties page factory to the vector layer properties dialog.
+%End
+
+  public slots:
+
+    void insertFieldOrExpression();
+
+    void syncToLayer();
+%Docstring
+Reset to original (vector layer) values
+%End
+
+    QString htmlMetadata();
+%Docstring
+Gets metadata about the layer in nice formatted html
+%End
+
+    void mLayerOrigNameLineEdit_textEdited( const QString &text );
+%Docstring
+Slot to update layer display name as original is edited
+%End
+
+    void apply();
+%Docstring
+Called when apply button is pressed or dialog is accepted
+%End
+
+    void onCancel();
+%Docstring
+Called when cancel button is pressed
+%End
+
+
+    void pbnQueryBuilder_clicked();
+    void pbnIndex_clicked();
+    void mCrsSelector_crsChanged( const QgsCoordinateReferenceSystem &crs );
+    void loadDefaultStyle_clicked();
+    void saveDefaultStyle_clicked();
+    void loadMetadata();
+    void saveMetadataAs();
+    void saveDefaultMetadata();
+    void loadDefaultMetadata();
+    virtual void optionsStackedWidget_CurrentChanged( int index );
+
+    void pbnUpdateExtents_clicked();
+
+    void mButtonAddJoin_clicked();
+    void mButtonEditJoin_clicked();
+    void mJoinTreeWidget_itemDoubleClicked( QTreeWidgetItem *item, int column );
+    void mButtonRemoveJoin_clicked();
+
+    void mButtonAddWmsDimension_clicked();
+    void mButtonEditWmsDimension_clicked();
+    void mWmsDimensionsTreeWidget_itemDoubleClicked( QTreeWidgetItem *item, int column );
+    void mButtonRemoveWmsDimension_clicked();
+
+    void mSimplifyDrawingGroupBox_toggled( bool checked );
+
+  signals:
+
+    void toggleEditing( QgsMapLayer * );
+
+    void exportAuxiliaryLayer( QgsAuxiliaryLayer *layer );
+
+};
+
+
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/vector/qgsvectorlayerproperties.h                            *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/

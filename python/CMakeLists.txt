@@ -145,6 +145,7 @@ IF (WITH_GUI)
     ${CMAKE_SOURCE_DIR}/src/gui/layout
     ${CMAKE_SOURCE_DIR}/src/gui/locator
     ${CMAKE_SOURCE_DIR}/src/gui/processing
+    ${CMAKE_SOURCE_DIR}/src/gui/vector
 
     ${CMAKE_BINARY_DIR}/src/gui
   )

@@ -13,6 +13,22 @@ SET(QGIS_GUI_SRCS
   raster/qgsrastertransparencywidget.cpp
   raster/qgshillshaderendererwidget.cpp
 
+  vector/qgsattributeactiondialog.cpp
+  vector/qgsattributeactionpropertiesdialog.cpp
+  vector/qgsattributerelationedit.cpp
+  vector/qgsattributesforminitcode.cpp
+  vector/qgsattributesformproperties.cpp
+  vector/qgsattributetypedialog.cpp
+  vector/qgsdiagramproperties.cpp
+  vector/qgsfieldcalculator.cpp
+  vector/qgsjoindialog.cpp
+  vector/qgssourcefieldsproperties.cpp
+  vector/qgsvectorlayerlegendwidget.cpp
+  vector/qgsvectorlayerloadstyledialog.cpp
+  vector/qgsvectorlayerproperties.cpp
+  vector/qgsvectorlayersavestyledialog.cpp
+  vector/qgswmsdimensiondialog.cpp
+
   symbology/qgs25drendererwidget.cpp
   symbology/characterwidget.cpp
   symbology/qgsarrowsymbollayerwidget.cpp
@@ -263,6 +279,8 @@ SET(QGIS_GUI_SRCS
 
   qgisinterface.cpp
   qgsactionmenu.cpp
+  qgsaddattrdialog.cpp
+  qgsaddtaborgroup.cpp
   qgsadvanceddigitizingcanvasitem.cpp
   qgsadvanceddigitizingdockwidget.cpp
   qgsadvanceddigitizingfloater.cpp
@@ -349,7 +367,9 @@ SET(QGIS_GUI_SRCS
   qgshelp.cpp
   qgsidentifymenu.cpp
   qgskeyvaluewidget.cpp
+  qgslabelengineconfigdialog.cpp
   qgslabelinggui.cpp
+  qgslabelingwidget.cpp
   qgslistwidget.cpp
   qgslegendfilterbutton.cpp
   qgslimitedrandomcolorrampdialog.cpp
@@ -365,6 +385,7 @@ SET(QGIS_GUI_SRCS
   qgsmaplayeractionregistry.cpp
   qgsmaplayercombobox.cpp
   qgsmaplayerconfigwidgetfactory.cpp
+  qgsmaplayerstylecategoriesmodel.cpp
   qgsmaplayerstyleguiutils.cpp
   qgsmaplayerstylemanagerwidget.cpp
   qgsmapmouseevent.cpp
@@ -423,6 +444,7 @@ SET(QGIS_GUI_SRCS
   qgsrasterpyramidsoptionswidget.cpp
   qgsrelationeditorwidget.cpp
   qgsrubberband.cpp
+  qgsrulebasedlabelingwidget.cpp
   qgsscalecombobox.cpp
   qgsscalerangewidget.cpp
   qgsscalevisibilitydialog.cpp
@@ -463,6 +485,8 @@ SET(QGIS_GUI_SRCS
 SET(QGIS_GUI_MOC_HDRS
   qgisinterface.h
   qgsactionmenu.h
+  qgsaddattrdialog.h
+  qgsaddtaborgroup.h
   qgsadvanceddigitizingdockwidget.h
   qgsadvanceddigitizingfloater.h
   qgsaggregatetoolbutton.h
@@ -539,7 +563,9 @@ SET(QGIS_GUI_MOC_HDRS
   qgshighlight.h
   qgsidentifymenu.h
   qgskeyvaluewidget.h
+  qgslabelengineconfigdialog.h
   qgslabelinggui.h
+  qgslabelingwidget.h
   qgslistwidget.h
   qgslegendfilterbutton.h
   qgslimitedrandomcolorrampdialog.h
@@ -553,6 +579,7 @@ SET(QGIS_GUI_MOC_HDRS
   qgsmapcanvastracer.h
   qgsmaplayeractionregistry.h
   qgsmaplayercombobox.h
+  qgsmaplayerstylecategoriesmodel.h
   qgsmaplayerstyleguiutils.h
   qgsmaplayerstylemanagerwidget.h
   qgsmapoverviewcanvas.h
@@ -608,6 +635,7 @@ SET(QGIS_GUI_MOC_HDRS
   qgsrasterpyramidsoptionswidget.h
   qgsrelationeditorwidget.h
   qgsrubberband.h
+  qgsrulebasedlabelingwidget.h
   qgsscalecombobox.h
   qgsscalerangewidget.h
   qgsscalevisibilitydialog.h
@@ -637,6 +665,7 @@ SET(QGIS_GUI_MOC_HDRS
   qgsfiledownloaderdialog.h
   qgsdatasourcemanagerdialog.h
   qgsabstractdatasourcewidget.h
+  qgsvariableeditorwidget.h
   qgswidgetstatehelper_p.h
   qgsattributeeditorcontext.h
 
@@ -658,6 +687,22 @@ SET(QGIS_GUI_MOC_HDRS
   raster/qgsrendererrasterpropertieswidget.h
   raster/qgsrastertransparencywidget.h
   raster/qgshillshaderendererwidget.h
+
+  vector/qgsattributeactiondialog.h
+  vector/qgsattributeactionpropertiesdialog.h
+  vector/qgsattributerelationedit.h
+  vector/qgsattributesforminitcode.h
+  vector/qgsattributesformproperties.h
+  vector/qgsattributetypedialog.h
+  vector/qgsdiagramproperties.h
+  vector/qgsfieldcalculator.h
+  vector/qgsjoindialog.h
+  vector/qgssourcefieldsproperties.h
+  vector/qgsvectorlayerlegendwidget.h
+  vector/qgsvectorlayerloadstyledialog.h
+  vector/qgsvectorlayerproperties.h
+  vector/qgsvectorlayersavestyledialog.h
+  vector/qgswmsdimensiondialog.h
 
   symbology/qgs25drendererwidget.h
   symbology/characterwidget.h
@@ -1065,6 +1110,7 @@ SET(QGIS_GUI_UI_HDRS
   ${CMAKE_CURRENT_BINARY_DIR}/../ui/ui_qgslayoutwidgetbase.h
   ${CMAKE_CURRENT_BINARY_DIR}/../ui/ui_qgsrenderercontainerbase.h
   ${CMAKE_CURRENT_BINARY_DIR}/../ui/ui_qgslayertreeembeddedconfigwidgetbase.h
+  ${CMAKE_CURRENT_BINARY_DIR}/../ui/ui_qgsvectorlayerpropertiesbase.h
 )
 
 SET(IMAGE_RCCS ../../images/images.qrc)
@@ -1093,6 +1139,7 @@ INCLUDE_DIRECTORIES(
   ${CMAKE_SOURCE_DIR}/src/gui/providers/gdal
   ${CMAKE_SOURCE_DIR}/src/gui/providers/ogr
   ${CMAKE_SOURCE_DIR}/src/gui/raster
+  ${CMAKE_SOURCE_DIR}/src/gui/vector
   ${CMAKE_SOURCE_DIR}/src/core
   ${CMAKE_SOURCE_DIR}/src/core/annotations
   ${CMAKE_SOURCE_DIR}/src/core/auth

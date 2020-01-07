@@ -98,7 +98,7 @@ QgsVectorLayer3DRendererWidget::QgsVectorLayer3DRendererWidget( QgsVectorLayer *
 }
 
 
-void QgsVectorLayer3DRendererWidget::setLayer( QgsVectorLayer *layer )
+void QgsVectorLayer3DRendererWidget::syncToLayer( QgsMapLayer *layer )
 {
   mLayer = layer;
 
@@ -173,4 +173,23 @@ void QgsVectorLayer3DRendererWidget::onRendererTypeChanged( int index )
       Q_ASSERT( false );
   }
   emit widgetChanged();
+}
+
+
+QgsVectorLayer3DRendererWidgetFactory::QgsVectorLayer3DRendererWidgetFactory( QObject *parent )
+  : QObject( parent )
+{
+  setIcon( QIcon( ":/images/themes/default/3d.svg" ) );
+  setTitle( tr( "3D View" ) );
+}
+
+QgsMapLayerConfigWidget *QgsVectorLayer3DRendererWidgetFactory::createWidget( QgsMapLayer *layer, QgsMapCanvas *canvas, bool dockWidget, QWidget *parent ) const
+{
+  Q_UNUSED( dockWidget )
+  return new QgsVectorLayer3DRendererWidget( layer, canvas, parent );
+}
+
+bool QgsVectorLayer3DRendererWidgetFactory::supportsLayer( QgsMapLayer *layer ) const
+{
+  return layer->type() == QgsMapLayerType::VectorLayer;
 }

@@ -387,3 +387,4 @@
 %Include auto_generated/processing/qgsprocessingwidgetwrapper.sip
 %Include auto_generated/editorwidgets/qgsqmlwidgetwrapper.sip
 %Include auto_generated/qgsadvanceddigitizingcanvasitem.sip
+%Include auto_generated/vector/qgsvectorlayerproperties.sip
