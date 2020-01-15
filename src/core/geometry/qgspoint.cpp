@@ -308,7 +308,7 @@ json QgsPoint::asJsonObject( int precision ) const
 
 QString QgsPoint::asKML( int precision ) const
 {
-  return QString( "<Point><coordinates>%1,%2</coordinates></Point>" ).arg( qgsDoubleToString( mX, precision ) ).arg( qgsDoubleToString( mY, precision ) );
+  return QStringLiteral( "<Point><coordinates>%1,%2</coordinates></Point>" ).arg( qgsDoubleToString( mX, precision ) ).arg( qgsDoubleToString( mY, precision ) );
 }
 
 void QgsPoint::draw( QPainter &p ) const

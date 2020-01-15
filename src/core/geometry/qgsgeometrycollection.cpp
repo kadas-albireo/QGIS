@@ -448,12 +448,13 @@ json QgsGeometryCollection::asJsonObject( int precision ) const
 QString QgsGeometryCollection::asKML( int precision ) const
 {
   QString kml;
-  kml.append( "<MultiGeometry>" );
-  for ( int i = 0; i < mGeometries.size(); ++i )
+  kml.append( QLatin1String( "<MultiGeometry>" ) );
+  const QVector< QgsAbstractGeometry * > &geometries = mGeometries;
+  for ( const QgsAbstractGeometry *geometry : geometries )
   {
-    kml.append( mGeometries.at( i )->asKML( precision ) );
+    kml.append( geometry->asKML( precision ) );
   }
-  kml.append( "</MultiGeometry>" );
+  kml.append( QLatin1String( "</MultiGeometry>" ) );
   return kml;
 }
 
