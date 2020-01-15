@@ -102,12 +102,13 @@ DPI of 88 will be assumed.
 %End
 
 
-    QPainter *painter() const;
+    QPainter *painter();
 %Docstring
 Returns the destination QPainter for the render operation.
 
 .. seealso:: :py:func:`setPainter`
 %End
+
 
     QgsCoordinateTransform coordinateTransform() const;
 %Docstring
