@@ -523,53 +523,53 @@ QString QgsLineString::asKML( int precision ) const
   QString kml;
   if ( isRing() )
   {
-    kml.append( "<LinearRing>" );
+    kml.append( QLatin1String( "<LinearRing>" ) );
   }
   else
   {
-    kml.append( "<LineString>" );
+    kml.append( QLatin1String( "<LineString>" ) );
   }
   bool z = is3D();
-  kml.append( "<altitudeMode>" );
+  kml.append( QLatin1String( "<altitudeMode>" ) );
   if ( z )
   {
-    kml.append( "absolute" );
+    kml.append( QLatin1String( "absolute" ) );
   }
   else
   {
-    kml.append( "clampToGround" );
+    kml.append( QLatin1String( "clampToGround" ) );
   }
-  kml.append( "</altitudeMode>" );
-  kml.append( "<coordinates>" );
+  kml.append( QLatin1String( "</altitudeMode>" ) );
+  kml.append( QLatin1String( "<coordinates>" ) );
 
   int nPoints = mX.size();
   for ( int i = 0; i < nPoints; ++i )
   {
     if ( i > 0 )
     {
-      kml.append( " " );
+      kml.append( QLatin1String( " " ) );
     }
     kml.append( qgsDoubleToString( mX[i], precision ) );
-    kml.append( "," );
+    kml.append( QLatin1String( "," ) );
     kml.append( qgsDoubleToString( mY[i], precision ) );
     if ( z )
     {
-      kml.append( "," );
+      kml.append( QLatin1String( "," ) );
       kml.append( qgsDoubleToString( mZ[i], precision ) );
     }
     else
     {
-      kml.append( ",0" );
+      kml.append( QLatin1String( ",0" ) );
     }
   }
-  kml.append( "</coordinates>" );
+  kml.append( QLatin1String( "</coordinates>" ) );
   if ( isRing() )
   {
-    kml.append( "</LinearRing>" );
+    kml.append( QLatin1String( "</LinearRing>" ) );
   }
   else
   {
-    kml.append( "</LineString>" );
+    kml.append( QLatin1String( "</LineString>" ) );
   }
   return kml;
 }

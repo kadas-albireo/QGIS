@@ -147,13 +147,12 @@ QgsAbstractGeometry *QgsCurve::boundary() const
 
 QString QgsCurve::asKML( int precision ) const
 {
-  QgsLineString *lineString = curveToLine();
+  std::unique_ptr<QgsLineString> lineString( curveToLine() );
   if ( !lineString )
   {
     return QString();
   }
   QString kml = lineString->asKML( precision );
-  delete lineString;
   return kml;
 }
 

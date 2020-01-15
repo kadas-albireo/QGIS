@@ -440,20 +440,21 @@ json QgsCurvePolygon::asJsonObject( int precision ) const
 QString QgsCurvePolygon::asKML( int precision ) const
 {
   QString kml;
-  kml.append( "<Polygon>" );
+  kml.append( QLatin1String( "<Polygon>" ) );
   if ( mExteriorRing )
   {
-    kml.append( "<outerBoundaryIs>" );
+    kml.append( QLatin1String( "<outerBoundaryIs>" ) );
     kml.append( mExteriorRing->asKML( precision ) );
-    kml.append( "</outerBoundaryIs>" );
+    kml.append( QLatin1String( "</outerBoundaryIs>" ) );
   }
-  for ( int i = 0; i < mInteriorRings.size(); ++i )
+  const QVector<QgsCurve *> &interiorRings = mInteriorRings;
+  for ( const QgsCurve *ring : interiorRings )
   {
-    kml.append( "<innerBoundaryIs>" );
-    kml.append( mInteriorRings.at( i )->asKML( precision ) );
-    kml.append( "</innerBoundaryIs>" );
+    kml.append( QLatin1String( "<innerBoundaryIs>" ) );
+    kml.append( ring->asKML( precision ) );
+    kml.append( QLatin1String( "</innerBoundaryIs>" ) );
   }
-  kml.append( "</Polygon>" );
+  kml.append( QLatin1String( "</Polygon>" ) );
   return kml;
 }
 
