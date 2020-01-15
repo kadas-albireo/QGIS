@@ -65,6 +65,7 @@ void QgsGpsMarker::setCenter( const QgsPointXY &point )
 void QgsGpsMarker::setDirection( double direction )
 {
   mDirection = direction;
+  update();
 }
 
 void QgsGpsMarker::paint( QPainter *p )
