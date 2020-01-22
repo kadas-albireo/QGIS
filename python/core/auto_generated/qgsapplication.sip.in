@@ -899,6 +899,15 @@ Set translation
 .. versionadded:: 3.4
 %End
 
+    QString translation() const;
+%Docstring
+Returns the current application translation locale code
+
+.. seealso:: :py:func:`setTranslation`
+
+.. versionadded:: 3.12
+%End
+
     void collectTranslatableObjects( QgsTranslationContext *translationContext );
 %Docstring
 Emits the signal to collect all the strings of .qgs to be included in ts file
