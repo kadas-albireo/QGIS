@@ -824,6 +824,13 @@ class CORE_EXPORT QgsApplication : public QApplication
     static void setTranslation( const QString &translation ) { sTranslation = translation; }
 
     /**
+     * Returns the current application translation locale code
+     * \see setTranslation()
+     * \since QGIS 3.12
+     */
+    QString translation() const { return sTranslation; }
+
+    /**
      * Emits the signal to collect all the strings of .qgs to be included in ts file
      *
      * \since QGIS 3.4
