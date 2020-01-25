@@ -1062,6 +1062,7 @@ SET(QGIS_CORE_HDRS
   qgstracer.h
   qgstranslationcontext.h
   qobjectuniqueptr.h
+  qgsuserprofile.h
 
   qgsvectordataprovider.h
   qgsvectorlayercache.h
