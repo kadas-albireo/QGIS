@@ -930,6 +930,7 @@ class CORE_EXPORT QgsApplication : public QApplication
 
     QTranslator *mQgisTranslator = nullptr;
     QTranslator *mQtTranslator = nullptr;
+    QTranslator *mQtBaseTranslator = nullptr;
 
     QgsDataItemProviderRegistry *mDataItemProviderRegistry = nullptr;
     QgsAuthManager *mAuthManager = nullptr;
