@@ -3270,7 +3270,17 @@ QString QgsProject::attachedFile( const QString &identifier ) const
     return QString();
   }
   realFileName = identifier.mid( 11 );
-  return QDir( mArchive->dir() ).absoluteFilePath( identifier.mid( 11 ) );
+  return QDir( mArchive->dir() ).absoluteFilePath( realFileName );
+}
+
+bool QgsProject::removeAttachedFile( const QString &identifier )
+{
+  QString realFileName = identifier;
+  if ( !identifier.startsWith( "attachment:" ) )
+  {
+    return false;
+  };
+  return mArchive->removeFile( attachedFile( identifier ) );
 }
 
 QgsStringMap QgsProject::attachedFiles() const

@@ -1083,16 +1083,24 @@ class CORE_EXPORT QgsProject : public QObject, public QgsExpressionContextGenera
      * Returns the path to an attached file known by \a identifier.
      *
      * \note Attached files are only supported by QGZ file based projects
-     * \see collectAttachedFiles()
+     * \see attachedFiles()
      * \since QGIS 3.8
      */
     QString attachedFile( const QString &identifier ) const;
 
     /**
+     * Removes the attached file known by \a identifier.
+     * \since QGIS 3.12
+     * \return Whether removal succeeded.
+     * \see attachedFiles()
+     */
+    bool removeAttachedFile( const QString &identifier );
+
+    /**
      * Returns a map of all attached files with relative paths and real paths.
      *
      * \note Attached files are only supported by QGZ file based projects
-     * \see collectAttachedFiles()
+     * \see attachedFiles()
      * \see attachedFile()
      * \since QGIS 3.8
      */
