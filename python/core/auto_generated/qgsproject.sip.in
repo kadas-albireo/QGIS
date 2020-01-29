@@ -1054,9 +1054,20 @@ Returns the path to an attached file known by ``identifier``.
 
    Attached files are only supported by QGZ file based projects
 
-.. seealso:: :py:func:`collectAttachedFiles`
+.. seealso:: :py:func:`attachedFiles`
 
 .. versionadded:: 3.8
+%End
+
+    bool removeAttachedFile( const QString &identifier );
+%Docstring
+Removes the attached file known by ``identifier``.
+
+.. versionadded:: 3.12
+
+:return: Whether removal succeeded.
+
+.. seealso:: :py:func:`attachedFiles`
 %End
 
     QgsStringMap attachedFiles() const;
@@ -1067,7 +1078,7 @@ Returns a map of all attached files with relative paths and real paths.
 
    Attached files are only supported by QGZ file based projects
 
-.. seealso:: :py:func:`collectAttachedFiles`
+.. seealso:: :py:func:`attachedFiles`
 
 .. seealso:: :py:func:`attachedFile`
 
