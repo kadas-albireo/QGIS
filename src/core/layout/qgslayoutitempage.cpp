@@ -101,6 +101,48 @@ bool QgsLayoutItemPage::setPageSize( const QString &size, Orientation orientatio
   }
 }
 
+QPageLayout QgsLayoutItemPage::pageLayout() const
+{
+  QPageLayout pageLayout;
+  pageLayout.setMargins( {0, 0, 0, 0} );
+  pageLayout.setMode( QPageLayout::FullPageMode );
+  double factor = 1.;
+
+  QPageSize::Unit unit;
+  switch ( pageSize().units() )
+  {
+    case QgsUnitTypes::LayoutMillimeters:
+      factor = 1.; break;
+    case QgsUnitTypes::LayoutCentimeters:
+      factor = 10.; break;
+    case QgsUnitTypes::LayoutMeters:
+      factor = 1000.; break;
+    case QgsUnitTypes::LayoutInches:
+      factor = 25.4; break;
+    case QgsUnitTypes::LayoutFeet:
+      factor = 304.8; break;
+    case QgsUnitTypes::LayoutPoints:
+      factor = 0.0254; break;
+    case QgsUnitTypes::LayoutPicas:
+      factor = 4.2333; break;
+    case QgsUnitTypes::LayoutPixels:
+      factor = layout()->renderContext().dpi() / 25.4;
+  }
+
+  if ( pageSize().width() > pageSize().height() )
+  {
+    pageLayout.setOrientation( QPageLayout::Landscape );
+    pageLayout.setPageSize( QPageSize( QSizeF( pageSize().height(), pageSize().width() ) * factor, QPageSize::Millimeter ) );
+  }
+  else
+  {
+    pageLayout.setOrientation( QPageLayout::Portrait );
+    pageLayout.setPageSize( QPageSize( QSizeF( pageSize().width(), pageSize().height() ) * factor, QPageSize::Millimeter ) );
+  }
+  pageLayout.setUnits( QPageLayout::Millimeter );
+  return pageLayout;
+}
+
 QgsLayoutSize QgsLayoutItemPage::pageSize() const
 {
   return sizeWithUnits();
