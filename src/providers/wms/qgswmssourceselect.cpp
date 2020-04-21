@@ -278,6 +278,8 @@ bool QgsWMSSourceSelect::populateLayerList( const QgsWmsCapabilities &capabiliti
 {
   const QVector<QgsWmsLayerProperty> layers = capabilities.supportedLayers();
 
+  QString defaultEncoding = QgsSettings().value( "qgis/WMSDefaultFormat", "" ).toString();
+
   bool first = true;
   QSet<QString> alreadyAddedLabels;
   const auto constSupportedImageEncodings = capabilities.supportedImageEncodings();
@@ -298,7 +300,7 @@ bool QgsWMSSourceSelect::populateLayerList( const QgsWmsCapabilities &capabiliti
     alreadyAddedLabels.insert( mFormats[id].label );
 
     mImageFormatGroup->button( id )->setVisible( true );
-    if ( first )
+    if ( first || encoding == defaultEncoding )
     {
       mImageFormatGroup->button( id )->setChecked( true );
       first = false;
