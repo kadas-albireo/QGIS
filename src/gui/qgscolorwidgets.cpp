@@ -381,6 +381,7 @@ QgsColorWheel::QgsColorWheel( QWidget *parent )
     wheelGradient.setColorAt( relativePos, gradColor );
   }
   mWheelBrush = QBrush( wheelGradient );
+  setFixedSize( sizeHint() );
 }
 
 QgsColorWheel::~QgsColorWheel()
