@@ -91,6 +91,11 @@ class CORE_EXPORT QgsGdalUtils
      */
     static char **papszFromStringList( const QStringList &list );
 
+#ifndef QT_NO_NETWORKPROXY
+    //! Sets the gdal proxy variables
+    static void setupProxy();
+#endif
+
   private:
 
     /**
@@ -117,11 +122,6 @@ class CORE_EXPORT QgsGdalUtils
       GDALResampleAlg eResampleAlg,
       double dfMaxError,
       const GDALWarpOptions *psOptionsIn );
-
-#ifndef QT_NO_NETWORKPROXY
-    //! Sets the gdal proxy variables
-    static void setupProxy();
-#endif
 
     friend class TestQgsGdalUtils;
 };
