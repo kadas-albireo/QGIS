@@ -43,12 +43,12 @@ class QgsVectorLayer;
  *
  * \since QGIS 3.10
  */
-class CORE_EXPORT QgsRenderedFeatureHandlerInterface
+class CORE_EXPORT QgsRenderedFeatureHandlerInterface SIP_NODEFAULTCTORS
 {
   public:
     virtual ~QgsRenderedFeatureHandlerInterface() = default;
 
-    struct CORE_EXPORT RenderedFeatureContext
+    struct CORE_EXPORT RenderedFeatureContext SIP_NODEFAULTCTORS
     {
 
       /**

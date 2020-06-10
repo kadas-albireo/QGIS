@@ -11,7 +11,7 @@
 
 
 
-class QgsGeometryCheckError
+class QgsGeometryCheckError /NoDefaultCtors/
 {
 %Docstring
 This represents an error reported by a geometry check.

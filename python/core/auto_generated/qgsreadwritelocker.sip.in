@@ -10,7 +10,7 @@
 
 
 
-class QgsReadWriteLocker
+class QgsReadWriteLocker /NoDefaultCtors/
 {
 %Docstring
 The QgsReadWriteLocker class is a convenience class that simplifies locking and unlocking QReadWriteLocks.

@@ -406,7 +406,7 @@ Returns the blend mode for the effect
 
 };
 
-class QgsEffectPainter
+class QgsEffectPainter /NoDefaultCtors/
 {
 %Docstring
 A class to manager painter saving and restoring required for effect drawing

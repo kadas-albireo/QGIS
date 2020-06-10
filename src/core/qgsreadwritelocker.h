@@ -19,6 +19,7 @@
 #define QGSREADWRITELOCKER_H
 
 #include "qgis_core.h"
+#include "qgis_sip.h"
 
 #include <QReadWriteLock>
 
@@ -37,7 +38,7 @@
  *
  * \since QGIS 3.4
  */
-class CORE_EXPORT QgsReadWriteLocker
+class CORE_EXPORT QgsReadWriteLocker SIP_NODEFAULTCTORS
 {
   public:
 

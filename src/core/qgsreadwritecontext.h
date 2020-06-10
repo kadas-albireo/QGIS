@@ -155,7 +155,7 @@ class CORE_EXPORT QgsReadWriteContext
  * This would happen when it gets out of scope.
  * \since QGIS 3.2
  */
-class CORE_EXPORT QgsReadWriteContextCategoryPopper
+class CORE_EXPORT QgsReadWriteContextCategoryPopper SIP_NODEFAULTCTORS
 {
   public:
     //! Creates a popper

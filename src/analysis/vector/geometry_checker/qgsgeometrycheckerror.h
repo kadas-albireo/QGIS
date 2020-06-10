@@ -32,7 +32,7 @@ class QgsPointXY;
  * \note This class is a technology preview and unstable API.
  * \since QGIS 3.4
  */
-class ANALYSIS_EXPORT QgsGeometryCheckError
+class ANALYSIS_EXPORT QgsGeometryCheckError SIP_NODEFAULTCTORS
 {
   public:
 
