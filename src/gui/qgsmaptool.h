@@ -127,6 +127,9 @@ class GUI_EXPORT QgsMapTool : public QObject
     //! gesture event for overriding. Default implementation does nothing.
     virtual bool gestureEvent( QGestureEvent *e );
 
+    //! tooltip event for overriding. Default implementation does nothing.
+    virtual bool canvasToolTipEvent( QHelpEvent *e );
+
     /**
      * Use this to associate a QAction to this maptool. Then when the setMapTool
      * method of mapcanvas is called the action state will be set to on.
