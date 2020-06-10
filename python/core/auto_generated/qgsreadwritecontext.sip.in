@@ -134,7 +134,7 @@ Sets data coordinate transform context to ``transformContext``
 };
 
 
-class QgsReadWriteContextCategoryPopper
+class QgsReadWriteContextCategoryPopper /NoDefaultCtors/
 {
 %Docstring
 Allows entering a context category and takes care of

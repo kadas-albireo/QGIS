@@ -63,7 +63,7 @@ class CORE_EXPORT QgsRuleBasedRenderer : public QgsFeatureRenderer
      * A QgsRuleBasedRenderer rendering job, consisting of a feature to be rendered with a particular symbol.
      * \ingroup core
      */
-    struct RenderJob
+    struct RenderJob SIP_NODEFAULTCTORS
     {
       RenderJob( QgsRuleBasedRenderer::FeatureToRender &_ftr, QgsSymbol *_s )
         : ftr( _ftr )

@@ -391,7 +391,7 @@ class CORE_EXPORT QgsDrawSourceEffect : public QgsPaintEffect
  *
  * \since QGIS 3.0
  */
-class CORE_EXPORT QgsEffectPainter
+class CORE_EXPORT QgsEffectPainter SIP_NODEFAULTCTORS
 {
   public:
 

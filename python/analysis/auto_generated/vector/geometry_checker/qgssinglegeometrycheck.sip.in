@@ -79,7 +79,7 @@ The vertex id of the error. May be invalid depending on the check.
   protected:
 };
 
-class QgsGeometryCheckErrorSingle : QgsGeometryCheckError
+class QgsGeometryCheckErrorSingle : QgsGeometryCheckError /NoDefaultCtors/
 {
 %Docstring
 

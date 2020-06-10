@@ -112,7 +112,7 @@ class ANALYSIS_EXPORT QgsSingleGeometryCheckError
  * \note This class is a technology preview and unstable API.
  * \since QGIS 3.4
  */
-class ANALYSIS_EXPORT QgsGeometryCheckErrorSingle : public QgsGeometryCheckError
+class ANALYSIS_EXPORT QgsGeometryCheckErrorSingle : public QgsGeometryCheckError SIP_NODEFAULTCTORS
 {
   public:
 

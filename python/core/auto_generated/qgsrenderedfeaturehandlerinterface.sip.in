@@ -9,7 +9,7 @@
 
 
 
-class QgsRenderedFeatureHandlerInterface
+class QgsRenderedFeatureHandlerInterface /NoDefaultCtors/
 {
 %Docstring
 
@@ -34,7 +34,7 @@ of all features rendered on a map.
   public:
     virtual ~QgsRenderedFeatureHandlerInterface();
 
-    struct RenderedFeatureContext
+    struct RenderedFeatureContext /NoDefaultCtors/
     {
 
       RenderedFeatureContext( const QgsRenderContext &renderContext );

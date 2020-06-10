@@ -40,7 +40,7 @@ typedef QMultiMap< int, QgsColorBox > QgsColorBoxMap; // sum of pixels / color b
  * This class is an interface hiding the details of reading input and writing
  * output from/to a wms request mechanism.
  */
-class SERVER_EXPORT QgsRequestHandler
+class SERVER_EXPORT QgsRequestHandler SIP_NODEFAULTCTORS
 {
   public:
 

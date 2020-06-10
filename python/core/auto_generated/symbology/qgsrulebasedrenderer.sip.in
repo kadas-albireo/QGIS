@@ -36,7 +36,7 @@ the rules and draws features with symbols from rules that match.
       int flags; // selected and/or draw markers
     };
 
-    struct RenderJob
+    struct RenderJob /NoDefaultCtors/
     {
       RenderJob( QgsRuleBasedRenderer::FeatureToRender &_ftr, QgsSymbol *_s );
 

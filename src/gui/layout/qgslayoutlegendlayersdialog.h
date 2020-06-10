@@ -30,7 +30,7 @@ class GUI_EXPORT QgsLayoutLegendLayersDialog: public QDialog, private Ui::QgsLay
     Q_OBJECT
 
   public:
-    QgsLayoutLegendLayersDialog( QWidget *parent = nullptr );
+    QgsLayoutLegendLayersDialog( QWidget *parent );
 
     /**
      * Sets a list of visible \a layers, to use for filtering within the dialog.
@@ -44,8 +44,6 @@ class GUI_EXPORT QgsLayoutLegendLayersDialog: public QDialog, private Ui::QgsLay
     void filterVisible( bool enabled );
 
   private:
-    QgsLayoutLegendLayersDialog() = delete;
-
     QgsMapLayerProxyModel *mModel = nullptr;
     QList< QgsMapLayer * > mVisibleLayers;
 };
