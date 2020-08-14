@@ -23,6 +23,7 @@ INCLUDE_DIRECTORIES(
   ${CMAKE_SOURCE_DIR}/src/gui/attributetable
   ${CMAKE_SOURCE_DIR}/src/gui/symbology
   ${CMAKE_SOURCE_DIR}/src/gui/raster
+  ${CMAKE_SOURCE_DIR}/src/gui/vector
   ${CMAKE_SOURCE_DIR}/src/python
   ${CMAKE_SOURCE_DIR}/src/app
   ${CMAKE_SOURCE_DIR}/src/app/attributeformconfig
