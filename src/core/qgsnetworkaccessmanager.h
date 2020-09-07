@@ -545,6 +545,8 @@ class CORE_EXPORT QgsNetworkAccessManager : public QNetworkAccessManager
     % End
 #endif
 
+    void preprocessRequest( QNetworkRequest *req ) const;
+
   signals:
 
     /**

@@ -385,6 +385,8 @@ Returns ``True`` if processor existed and was removed.
     }
 %End
 
+    void preprocessRequest( QNetworkRequest *req ) const;
+
   signals:
 
  void requestAboutToBeCreated( QNetworkAccessManager::Operation, const QNetworkRequest &, QIODevice * ) /Deprecated/;
