@@ -414,7 +414,7 @@ void QgsNetworkAccessManager::restartTimeout( QNetworkReply *reply )
   QTimer *timer = reply->findChild<QTimer *>( QStringLiteral( "timeoutTimer" ) );
   if ( timer )
   {
-    Q_ASSERT( !timer->isActive() );
+//    Q_ASSERT( !timer->isActive() );
     QgsDebugMsg( QStringLiteral( "Restarting network reply timeout" ) );
     timer->setSingleShot( true );
     timer->start( timeout() );
