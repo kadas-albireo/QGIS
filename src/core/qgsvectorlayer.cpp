@@ -1899,7 +1899,7 @@ QString QgsVectorLayer::encodedSource( const QString &source, const QgsReadWrite
   {
     QUrl urlSource = QUrl::fromEncoded( src.toLatin1() );
     QUrl urlDest = QUrl::fromLocalFile( context.pathResolver().writePath( urlSource.toLocalFile() ) );
-    urlDest.setQueryItems( urlSource.queryItems() );
+    urlDest.setQuery( urlSource.query() );
     src = QString::fromLatin1( urlDest.toEncoded() );
   }
   else if ( providerType() == QLatin1String( "memory" ) )
@@ -1978,7 +1978,7 @@ QString QgsVectorLayer::decodedSource( const QString &source, const QString &pro
     }
 
     QUrl urlDest = QUrl::fromLocalFile( context.pathResolver().readPath( urlSource.toLocalFile() ) );
-    urlDest.setQueryItems( urlSource.queryItems() );
+    urlDest.setQuery( urlSource.query() );
     src = QString::fromLatin1( urlDest.toEncoded() );
   }
   else if ( provider == QLatin1String( "virtual" ) )
@@ -2988,7 +2988,7 @@ bool QgsVectorLayer::deleteAttributes( const QList<int> &attrs )
   bool deleted = false;
 
   // Remove multiple occurrences of same attribute
-  QList<int> attrList = attrs.toSet().toList();
+  QList<int> attrList = qgis::listToSet( attrs ).values();
 
   std::sort( attrList.begin(), attrList.end(), std::greater<int>() );
 
@@ -3803,7 +3803,7 @@ QSet<QVariant> QgsVectorLayer::uniqueValues( int index, int limit ) const
         }
       }
 
-      return val.values().toSet();
+      return qgis::listToSet( val.values() );
     }
   }
 
@@ -5117,7 +5117,7 @@ bool QgsVectorLayer::setDependencies( const QSet<QgsMapLayerDependency> &oDeps )
 QgsFieldConstraints::Constraints QgsVectorLayer::fieldConstraints( int fieldIndex ) const
 {
   if ( fieldIndex < 0 || fieldIndex >= mFields.count() )
-    return nullptr;
+    return QgsFieldConstraints::Constraints();
 
   QgsFieldConstraints::Constraints constraints = mFields.at( fieldIndex ).constraints().constraints();
 
@@ -5159,7 +5159,7 @@ void QgsVectorLayer::setFieldConstraint( int index, QgsFieldConstraints::Constra
   QString name = mFields.at( index ).name();
 
   // add constraint to existing constraints
-  QgsFieldConstraints::Constraints constraints = mFieldConstraints.value( name, nullptr );
+  QgsFieldConstraints::Constraints constraints = mFieldConstraints.value( name, QgsFieldConstraints::Constraints() );
   constraints |= constraint;
   mFieldConstraints.insert( name, constraints );
 
@@ -5176,7 +5176,7 @@ void QgsVectorLayer::removeFieldConstraint( int index, QgsFieldConstraints::Cons
   QString name = mFields.at( index ).name();
 
   // remove constraint from existing constraints
-  QgsFieldConstraints::Constraints constraints = mFieldConstraints.value( name, nullptr );
+  QgsFieldConstraints::Constraints constraints = mFieldConstraints.value( name, QgsFieldConstraints::Constraints() );
   constraints &= ~constraint;
   mFieldConstraints.insert( name, constraints );
 

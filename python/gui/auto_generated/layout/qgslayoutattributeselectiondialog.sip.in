@@ -300,7 +300,7 @@ A dialog to select what attributes to display (in the table item), set the colum
 #include "qgslayoutattributeselectiondialog.h"
 %End
   public:
-    QgsLayoutAttributeSelectionDialog( QgsLayoutItemAttributeTable *table, QgsVectorLayer *vLayer, QWidget *parent = 0, Qt::WindowFlags f = 0 );
+    QgsLayoutAttributeSelectionDialog( QgsLayoutItemAttributeTable *table, QgsVectorLayer *vLayer, QWidget *parent = 0, Qt::WindowFlags f = Qt::WindowFlags() );
 
 };
 

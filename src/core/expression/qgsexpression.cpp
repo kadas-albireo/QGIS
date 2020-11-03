@@ -298,7 +298,7 @@ QSet<int> QgsExpression::referencedAttributeIndexes( const QgsFields &fields ) c
   {
     if ( fieldName == QgsFeatureRequest::ALL_ATTRIBUTES )
     {
-      referencedIndexes = fields.allAttributesList().toSet();
+      referencedIndexes = qgis::listToSet( fields.allAttributesList() );
       break;
     }
     const int idx = fields.lookupField( fieldName );

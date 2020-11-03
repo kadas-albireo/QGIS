@@ -15,8 +15,9 @@
 #ifndef QGSRUNTIMEPROFILER_H
 #define QGSRUNTIMEPROFILER_H
 
-#include <QTime>
 #include "qgis_sip.h"
+#include <QElapsedTimer>
+#include <QList>
 #include <QPair>
 #include <QStack>
 
@@ -80,7 +81,7 @@ class CORE_EXPORT QgsRuntimeProfiler
   private:
     QString mGroupPrefix;
     QStack<QString> mGroupStack;
-    QTime mProfileTime;
+    QElapsedTimer mProfileTime;
     QString mCurrentName;
     QList<QPair<QString, double > > mProfileTimes;
 };

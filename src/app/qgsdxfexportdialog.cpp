@@ -168,7 +168,7 @@ QVariant QgsVectorLayerAndAttributeModel::data( const QModelIndex &idx, int role
       int n;
       for ( n = 0; !hasChecked || !hasUnchecked; n++ )
       {
-        QVariant v = data( idx.child( n, 0 ), role );
+        QVariant v = data( index( n, 0, idx ), role );
         if ( !v.isValid() )
           break;
 
@@ -230,14 +230,14 @@ QVariant QgsVectorLayerAndAttributeModel::data( const QModelIndex &idx, int role
   return QVariant();
 }
 
-bool QgsVectorLayerAndAttributeModel::setData( const QModelIndex &index, const QVariant &value, int role )
+bool QgsVectorLayerAndAttributeModel::setData( const QModelIndex &idx, const QVariant &value, int role )
 {
-  if ( index.column() == 0 && role == Qt::CheckStateRole )
+  if ( idx.column() == 0 && role == Qt::CheckStateRole )
   {
     int i = 0;
     for ( i = 0; ; i++ )
     {
-      QModelIndex child = index.child( i, 0 );
+      QModelIndex child = index( i, 0, idx );
       if ( !child.isValid() )
         break;
 
@@ -247,24 +247,24 @@ bool QgsVectorLayerAndAttributeModel::setData( const QModelIndex &index, const Q
     if ( i == 0 )
     {
       if ( value.toInt() == Qt::Checked )
-        mCheckedLeafs.insert( index );
+        mCheckedLeafs.insert( idx );
       else if ( value.toInt() == Qt::Unchecked )
-        mCheckedLeafs.remove( index );
+        mCheckedLeafs.remove( idx );
       else
         Q_ASSERT( "expected checked or unchecked" );
 
-      emit dataChanged( QModelIndex(), index );
+      emit dataChanged( QModelIndex(), idx );
     }
 
     return true;
   }
 
-  if ( index.column() == 1 )
+  if ( idx.column() == 1 )
   {
     if ( role != Qt::EditRole )
       return false;
 
-    QgsVectorLayer *vl = vectorLayer( index );
+    QgsVectorLayer *vl = vectorLayer( idx );
     if ( vl )
     {
       mAttributeIdx[ vl ] = value.toInt();
@@ -272,7 +272,7 @@ bool QgsVectorLayerAndAttributeModel::setData( const QModelIndex &index, const Q
     }
   }
 
-  return QgsLayerTreeModel::setData( index, value, role );
+  return QgsLayerTreeModel::setData( idx, value, role );
 }
 
 
@@ -351,7 +351,7 @@ void QgsVectorLayerAndAttributeModel::applyVisibilityPreset( const QString &name
   }
   else
   {
-    visibleLayers = QgsProject::instance()->mapThemeCollection()->mapThemeVisibleLayerIds( name ).toSet();
+    visibleLayers = qgis::listToSet( QgsProject::instance()->mapThemeCollection()->mapThemeVisibleLayerIds( name ) );
   }
 
   if ( visibleLayers.isEmpty() )
@@ -443,7 +443,7 @@ QgsDxfExportDialog::QgsDxfExportDialog( QWidget *parent, Qt::WindowFlags f )
   mTreeView->setItemDelegate( mFieldSelectorDelegate );
 
   QgsLayerTreeModel *model = new QgsVectorLayerAndAttributeModel( mLayerTreeGroup, this );
-  model->setFlags( nullptr );
+  model->setFlags( QgsLayerTreeModel::Flags() );
   mTreeView->setModel( model );
   mTreeView->resizeColumnToContents( 0 );
   mTreeView->header()->show();

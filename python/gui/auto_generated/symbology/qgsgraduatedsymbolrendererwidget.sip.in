@@ -59,7 +59,7 @@ Toggle the link between classes boundaries
 
     void rowsMoved();
     void modelDataChanged();
-    void refreshRanges( bool reset = false );
+    void refreshRanges( bool reset );
 
   protected slots:
 

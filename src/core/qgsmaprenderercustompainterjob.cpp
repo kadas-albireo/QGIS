@@ -86,7 +86,7 @@ void QgsMapRendererCustomPainterJob::start()
   QgsDebugMsgLevel( QStringLiteral( "QPAINTER run!" ), 5 );
 
   QgsDebugMsgLevel( QStringLiteral( "Preparing list of layer jobs for rendering" ), 5 );
-  QTime prepareTime;
+  QElapsedTimer prepareTime;
   prepareTime.start();
 
   preparePainter( mPainter, mSettings.backgroundColor() );
@@ -135,7 +135,7 @@ void QgsMapRendererCustomPainterJob::cancel()
   disconnect( &mFutureWatcher, &QFutureWatcher<void>::finished, this, &QgsMapRendererCustomPainterJob::futureFinished );
   cancelWithoutBlocking();
 
-  QTime t;
+  QElapsedTimer t;
   t.start();
 
   mFutureWatcher.waitForFinished();
@@ -171,7 +171,7 @@ void QgsMapRendererCustomPainterJob::waitForFinished()
 
   disconnect( &mFutureWatcher, &QFutureWatcher<void>::finished, this, &QgsMapRendererCustomPainterJob::futureFinished );
 
-  QTime t;
+  QElapsedTimer t;
   t.start();
 
   mFutureWatcher.waitForFinished();
@@ -279,7 +279,7 @@ void QgsMapRendererCustomPainterJob::staticRender( QgsMapRendererCustomPainterJo
 void QgsMapRendererCustomPainterJob::doRender()
 {
   QgsDebugMsgLevel( QStringLiteral( "Starting to render layer stack." ), 5 );
-  QTime renderTime;
+  QElapsedTimer renderTime;
   renderTime.start();
 
   for ( LayerRenderJobs::iterator it = mLayerJobs.begin(); it != mLayerJobs.end(); ++it )
@@ -298,7 +298,7 @@ void QgsMapRendererCustomPainterJob::doRender()
 
     if ( !job.cached )
     {
-      QTime layerTime;
+      QElapsedTimer layerTime;
       layerTime.start();
 
       if ( job.img )
@@ -328,7 +328,7 @@ void QgsMapRendererCustomPainterJob::doRender()
   {
     if ( !mLabelJob.cached )
     {
-      QTime labelTime;
+      QElapsedTimer labelTime;
       labelTime.start();
 
       if ( mLabelJob.img )

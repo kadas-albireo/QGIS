@@ -659,7 +659,7 @@ void QgsAttributeTableDialog::replaceSearchWidget( QWidget *oldw, QWidget *neww 
 {
   mFilterLayout->removeWidget( oldw );
   oldw->setVisible( false );
-  mFilterLayout->addWidget( neww, 0, 0, nullptr );
+  mFilterLayout->addWidget( neww, 0, 0, Qt::Alignment() );
   neww->setVisible( true );
   neww->setFocus();
 }
@@ -872,7 +872,7 @@ void QgsAttributeTableDialog::mActionCopySelectedRows_triggered()
     }
     featureStore.setFields( fields );
 
-    QgsFeatureIterator it = mLayer->getFeatures( QgsFeatureRequest( featureIds.toSet() )
+    QgsFeatureIterator it = mLayer->getFeatures( QgsFeatureRequest( qgis::listToSet( featureIds ) )
                             .setSubsetOfAttributes( fieldNames, mLayer->fields() ) );
     QgsFeatureMap featureMap;
     QgsFeature feature;
@@ -1146,7 +1146,7 @@ void QgsAttributeTableDialog::handleStoreFilterExpression()
 
 void QgsAttributeTableDialog::saveAsStoredFilterExpression()
 {
-  QgsDialog *dlg = new QgsDialog( this, nullptr, QDialogButtonBox::Save | QDialogButtonBox::Cancel );
+  QgsDialog *dlg = new QgsDialog( this, Qt::WindowFlags(), QDialogButtonBox::Save | QDialogButtonBox::Cancel );
   dlg->setWindowTitle( tr( "Save Expression As" ) );
   QVBoxLayout *layout = dlg->layout();
   dlg->resize( std::max( 400, this->width() / 2 ), dlg->height() );
@@ -1167,7 +1167,7 @@ void QgsAttributeTableDialog::saveAsStoredFilterExpression()
 
 void QgsAttributeTableDialog::editStoredFilterExpression()
 {
-  QgsDialog *dlg = new QgsDialog( this, nullptr, QDialogButtonBox::Save | QDialogButtonBox::Cancel );
+  QgsDialog *dlg = new QgsDialog( this, Qt::WindowFlags(), QDialogButtonBox::Save | QDialogButtonBox::Cancel );
   dlg->setWindowTitle( tr( "Edit expression" ) );
   QVBoxLayout *layout = dlg->layout();
   dlg->resize( std::max( 400, this->width() / 2 ), dlg->height() );

@@ -1075,7 +1075,7 @@ QString QgsApplication::userLoginName()
 #elif QT_CONFIG(process)
   QProcess process;
 
-  process.start( QStringLiteral( "whoami" ) );
+  process.start( QStringLiteral( "whoami" ), QStringList() );
   process.waitForFinished();
   sUserName = process.readAllStandardOutput().trimmed();
 #endif

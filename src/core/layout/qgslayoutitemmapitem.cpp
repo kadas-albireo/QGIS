@@ -184,7 +184,7 @@ void QgsLayoutItemMapItemStack::moveItemUp( const QString &itemId )
   {
     return;
   }
-  mItems.swap( index, index + 1 );
+  mItems.swapItemsAt( index, index + 1 );
 }
 
 void QgsLayoutItemMapItemStack::moveItemDown( const QString &itemId )
@@ -200,7 +200,7 @@ void QgsLayoutItemMapItemStack::moveItemDown( const QString &itemId )
   {
     return;
   }
-  mItems.swap( index, index - 1 );
+  mItems.swapItemsAt( index, index - 1 );
 }
 
 QgsLayoutItemMapItem *QgsLayoutItemMapItemStack::item( const QString &itemId ) const

@@ -27,7 +27,6 @@
 #include <QSqlError>
 #include <QSqlQuery>
 #include <QTextStream>
-#include <QTime>
 #include <QTimer>
 #include <QVariant>
 #include <QSqlDriver>
@@ -1045,14 +1044,14 @@ QWidget *QgsAuthManager::authMethodEditWidget( const QString &authMethodKey, QWi
 QgsAuthMethod::Expansions QgsAuthManager::supportedAuthMethodExpansions( const QString &authcfg )
 {
   if ( isDisabled() )
-    return QgsAuthMethod::Expansions( nullptr );
+    return QgsAuthMethod::Expansions();
 
   QgsAuthMethod *authmethod = configAuthMethod( authcfg );
   if ( authmethod )
   {
     return authmethod->supportedExpansions();
   }
-  return QgsAuthMethod::Expansions( nullptr );
+  return QgsAuthMethod::Expansions();
 }
 
 bool QgsAuthManager::storeAuthenticationConfig( QgsAuthMethodConfig &mconfig )
@@ -2267,7 +2266,7 @@ bool QgsAuthManager::updateIgnoredSslErrorsCacheFromConfig( const QgsAuthConfigS
   QList<QSslError::SslError> errenums( config.sslIgnoredErrorEnums() );
   if ( !errenums.isEmpty() )
   {
-    mIgnoredSslErrorsCache.insert( shahostport, QSet<QSslError::SslError>::fromList( errenums ) );
+    mIgnoredSslErrorsCache.insert( shahostport, qgis::listToSet( errenums ) );
     QgsDebugMsg( QStringLiteral( "Update of ignored SSL errors cache SUCCEEDED for sha:host:port = %1" ).arg( shahostport ) );
     dumpIgnoredSslErrorsCache_();
     return true;
@@ -2348,7 +2347,7 @@ bool QgsAuthManager::rebuildIgnoredSslErrorCache()
       QList<QSslError::SslError> errenums( config.sslIgnoredErrorEnums() );
       if ( !errenums.isEmpty() )
       {
-        nextcache.insert( shahostport, QSet<QSslError::SslError>::fromList( errenums ) );
+        nextcache.insert( shahostport, qgis::listToSet( errenums ) );
       }
       if ( prevcache.contains( shahostport ) )
       {
@@ -2541,7 +2540,7 @@ bool QgsAuthManager::removeCertAuthority( const QSslCertificate &cert )
 const QList<QSslCertificate> QgsAuthManager::systemRootCAs()
 {
 #ifndef Q_OS_MAC
-  return QSslSocket::systemCaCertificates();
+  return QSslConfiguration::systemCaCertificates();
 #else
   QNetworkRequest req;
   return req.sslConfiguration().caCertificates();
@@ -2569,7 +2568,10 @@ const QList<QSslCertificate> QgsAuthManager::extraFileCAs()
   // only CAs or certs capable of signing other certs are allowed
   for ( const auto &cert : qgis::as_const( filecerts ) )
   {
-    if ( !allowinvalid.toBool() && !cert.isValid() )
+    if ( !allowinvalid.toBool() && ( cert.isBlacklisted()
+                                     || cert.isNull()
+                                     || cert.expiryDate() <= QDateTime::currentDateTime()
+                                     || cert.effectiveDate() > QDateTime::currentDateTime() ) )
     {
       continue;
     }

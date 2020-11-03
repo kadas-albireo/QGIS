@@ -51,7 +51,7 @@ class QgsVectorLayerAndAttributeModel : public QgsLayerTreeModel
     QVariant headerData( int section, Qt::Orientation orientation, int role = Qt::DisplayRole ) const override;
     QVariant data( const QModelIndex &index, int role = Qt::DisplayRole ) const override;
     Qt::ItemFlags flags( const QModelIndex &index ) const override;
-    bool setData( const QModelIndex &index, const QVariant &value, int role = Qt::EditRole ) override;
+    bool setData( const QModelIndex &idx, const QVariant &value, int role = Qt::EditRole ) override;
 
     QList< QgsDxfExport::DxfLayer > layers() const;
 
@@ -76,7 +76,7 @@ class QgsDxfExportDialog : public QDialog, private Ui::QgsDxfExportDialogBase
 {
     Q_OBJECT
   public:
-    QgsDxfExportDialog( QWidget *parent = nullptr, Qt::WindowFlags f = nullptr );
+    QgsDxfExportDialog( QWidget *parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags() );
     ~QgsDxfExportDialog() override;
 
     QList< QgsDxfExport::DxfLayer > layers() const;

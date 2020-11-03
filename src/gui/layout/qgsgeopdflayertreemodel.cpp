@@ -25,7 +25,7 @@
 QgsGeoPdfLayerTreeModel::QgsGeoPdfLayerTreeModel( QgsLayerTree *rootNode, QObject *parent )
   : QgsLayerTreeModel( rootNode, parent )
 {
-  setFlags( nullptr ); // ideally we'd just show embedded legend nodes - but the api doesn't exist for this
+  setFlags( QgsLayerTreeModel::Flags() ); // ideally we'd just show embedded legend nodes - but the api doesn't exist for this
 }
 
 int QgsGeoPdfLayerTreeModel::columnCount( const QModelIndex &parent ) const

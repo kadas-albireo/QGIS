@@ -528,7 +528,7 @@ class CORE_EXPORT QgsLabelFeature
     //! Distance to smooth angle of line start and end when calculating overruns
     double mOverrunSmoothDistance = 0;
 
-    pal::LineArrangementFlags mArrangementFlags = nullptr;
+    pal::LineArrangementFlags mArrangementFlags;
 
   private:
 

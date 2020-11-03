@@ -78,7 +78,7 @@ email                : tim at linfiniti.com
 #include <QPixmap>
 #include <QRegExp>
 #include <QSlider>
-#include <QTime>
+#include <QElapsedTimer>
 
 #define ERR(message) QGS_ERROR_MESSAGE(message,"Raster layer")
 
@@ -251,7 +251,7 @@ void QgsRasterLayer::draw( QPainter *theQPainter,
                            const QgsMapToPixel *qgsMapToPixel )
 {
   QgsDebugMsgLevel( QStringLiteral( " 3 arguments" ), 4 );
-  QTime time;
+  QElapsedTimer time;
   time.start();
   //
   //

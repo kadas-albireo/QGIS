@@ -19,7 +19,6 @@
 #include "qgsmeshtimesettings.h"
 
 #include <limits>
-#include <QTime>
 #include <QDateTime>
 
 ///@cond PRIVATE

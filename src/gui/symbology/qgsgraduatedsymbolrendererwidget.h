@@ -54,7 +54,7 @@ class GUI_EXPORT QgsGraduatedSymbolRendererModel : public QAbstractItemModel
     void deleteRows( QList<int> rows );
     void removeAllRows();
     void sort( int column, Qt::SortOrder order = Qt::AscendingOrder ) override;
-    void updateSymbology( bool resetModel = false );
+    void updateSymbology( );
     void updateLabels();
 
   signals:
@@ -120,7 +120,7 @@ class GUI_EXPORT QgsGraduatedSymbolRendererWidget : public QgsRendererWidget, pr
 
     void rowsMoved();
     void modelDataChanged();
-    void refreshRanges( bool reset = false );
+    void refreshRanges( bool reset );
 
   private slots:
     void mSizeUnitWidget_changed();

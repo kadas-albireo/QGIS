@@ -550,7 +550,7 @@ void QgsSymbolButton::updatePreview( const QColor &color, QgsSymbol *tempSymbol 
 
   // set tooltip
   // create very large preview image
-  int width = static_cast< int >( Qgis::UI_SCALE_FACTOR * fontMetrics().width( 'X' ) * 23 );
+  int width = static_cast< int >( Qgis::UI_SCALE_FACTOR * fontMetrics().horizontalAdvance( 'X' ) * 23 );
   int height = static_cast< int >( width / 1.61803398875 ); // golden ratio
 
   QPixmap pm = QgsSymbolLayerUtils::symbolPreviewPixmap( previewSymbol.get(), QSize( width, height ), height / 20 );
@@ -642,9 +642,7 @@ void QgsSymbolButton::showColorDialog()
     return;
   }
 
-  QColor newColor;
-
-  QgsColorDialog dialog( this, nullptr, mSymbol->color() );
+  QgsColorDialog dialog( this, Qt::WindowFlags(), mSymbol->color() );
   dialog.setTitle( tr( "Symbol Color" ) );
   dialog.setAllowOpacity( true );
 

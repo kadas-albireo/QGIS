@@ -187,7 +187,7 @@ void QgsDataDefinedSizeLegend::drawCollapsedLegend( QgsRenderContext &context, Q
   int maxTextWidth = 0;
   for ( const SizeClass &c : qgis::as_const( classes ) )
   {
-    int w = fm.width( c.label );
+    int w = fm.horizontalAdvance( c.label );
     if ( w > maxTextWidth )
       maxTextWidth = w;
   }

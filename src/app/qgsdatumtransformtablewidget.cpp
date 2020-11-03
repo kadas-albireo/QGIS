@@ -27,8 +27,9 @@ QgsDatumTransformTableModel::QgsDatumTransformTableModel( QObject *parent )
 
 void QgsDatumTransformTableModel::setTransformContext( const QgsCoordinateTransformContext &context )
 {
+  beginResetModel();
   mTransformContext = context;
-  reset();
+  endResetModel();
 }
 
 void QgsDatumTransformTableModel::removeTransform( const QModelIndexList &indexes )
@@ -47,8 +48,9 @@ void QgsDatumTransformTableModel::removeTransform( const QModelIndexList &indexe
     }
     if ( sourceCrs.isValid() && destinationCrs.isValid() )
     {
+      beginResetModel();
       mTransformContext.removeCoordinateOperation( sourceCrs, destinationCrs );
-      reset();
+      endResetModel();
       break;
     }
   }
@@ -229,7 +231,7 @@ QgsDatumTransformTableWidget::QgsDatumTransformTableWidget( QWidget *parent )
 
 void QgsDatumTransformTableWidget::addDatumTransform()
 {
-  QgsDatumTransformDialog dlg( QgsCoordinateReferenceSystem(), QgsCoordinateReferenceSystem(), true, false, false, QPair< int, int >(), nullptr, nullptr, QString(), QgisApp::instance()->mapCanvas() );
+  QgsDatumTransformDialog dlg( QgsCoordinateReferenceSystem(), QgsCoordinateReferenceSystem(), true, false, false, QPair< int, int >(), nullptr, Qt::WindowFlags(), QString(), QgisApp::instance()->mapCanvas() );
   if ( dlg.exec() )
   {
     const QgsDatumTransformDialog::TransformInfo dt = dlg.selectedDatumTransform();
@@ -297,7 +299,7 @@ void QgsDatumTransformTableWidget::editDatumTransform()
          ( sourceTransform != -1 || destinationTransform != -1 ) )
 #endif
     {
-      QgsDatumTransformDialog dlg( sourceCrs, destinationCrs, true, false, false, qMakePair( sourceTransform, destinationTransform ), nullptr, nullptr, proj, QgisApp::instance()->mapCanvas() );
+      QgsDatumTransformDialog dlg( sourceCrs, destinationCrs, true, false, false, qMakePair( sourceTransform, destinationTransform ), nullptr, Qt::WindowFlags(), proj, QgisApp::instance()->mapCanvas() );
       if ( dlg.exec() )
       {
         const QgsDatumTransformDialog::TransformInfo dt = dlg.selectedDatumTransform();

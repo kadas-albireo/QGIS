@@ -40,7 +40,7 @@ class QgsGeoPackageProviderConnection : public QgsAbstractDatabaseProviderConnec
     QList<QList<QVariant>> executeSql( const QString &sql ) const override;
     void vacuum( const QString &schema, const QString &name ) const override;
     QList<QgsAbstractDatabaseProviderConnection::TableProperty> tables( const QString &schema = QString(),
-        const TableFlags &flags = nullptr ) const override;
+        const TableFlags &flags = TableFlags() ) const override;
 
   private:
 

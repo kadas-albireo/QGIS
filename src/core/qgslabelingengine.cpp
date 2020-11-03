@@ -344,7 +344,7 @@ void QgsLabelingEngine::solve( QgsRenderContext &context )
 
   mPal->registerCancellationCallback( &_palIsCanceled, reinterpret_cast< void * >( &context ) );
 
-  QTime t;
+  QElapsedTimer t;
   t.start();
 
   // do the labeling itself
@@ -404,7 +404,7 @@ void QgsLabelingEngine::solve( QgsRenderContext &context )
 
 void QgsLabelingEngine::drawLabels( QgsRenderContext &context, const QString &layerId )
 {
-  QTime t;
+  QElapsedTimer t;
   t.start();
 
   const QgsLabelingEngineSettings &settings = mMapSettings.labelingEngineSettings();
@@ -758,7 +758,7 @@ QString QgsLabelingUtils::encodeLinePlacementFlags( pal::LineArrangementFlags fl
 
 pal::LineArrangementFlags QgsLabelingUtils::decodeLinePlacementFlags( const QString &string )
 {
-  pal::LineArrangementFlags flags = nullptr;
+  pal::LineArrangementFlags flags = pal::LineArrangementFlags();
   const QStringList flagList = string.split( ',' );
   bool foundLineOrientationFlag = false;
   for ( const QString &flag : flagList )

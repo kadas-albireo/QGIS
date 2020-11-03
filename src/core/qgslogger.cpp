@@ -30,7 +30,7 @@ int QgsLogger::sDebugLevel = -999; // undefined value
 int QgsLogger::sPrefixLength = -1;
 QString QgsLogger::sFileFilter;
 QString QgsLogger::sLogFile;
-QTime QgsLogger::sTime;
+QElapsedTimer QgsLogger::sTime;
 
 void QgsLogger::init()
 {

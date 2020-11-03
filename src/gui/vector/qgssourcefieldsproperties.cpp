@@ -157,15 +157,15 @@ void QgsSourceFieldsProperties::attributeAdded( int idx )
     {
       case QgsFields::OriginExpression:
         if ( i == 7 ) continue;
-        mFieldsList->item( row, i )->setBackgroundColor( expressionColor );
+        mFieldsList->item( row, i )->setBackground( expressionColor );
         break;
 
       case QgsFields::OriginJoin:
-        mFieldsList->item( row, i )->setBackgroundColor( joinColor );
+        mFieldsList->item( row, i )->setBackground( joinColor );
         break;
 
       default:
-        mFieldsList->item( row, i )->setBackgroundColor( defaultColor );
+        mFieldsList->item( row, i )->setBackground( defaultColor );
         break;
     }
   }
@@ -349,12 +349,12 @@ void QgsSourceFieldsProperties::deleteAttributeClicked()
   }
 
   if ( !expressionFields.isEmpty() )
-    mLayer->deleteAttributes( expressionFields.toList() );
+    mLayer->deleteAttributes( expressionFields.values() );
 
   if ( !providerFields.isEmpty() )
   {
     mLayer->beginEditCommand( tr( "Deleted attributes" ) );
-    if ( mLayer->deleteAttributes( providerFields.toList() ) )
+    if ( mLayer->deleteAttributes( providerFields.values() ) )
       mLayer->endEditCommand();
     else
       mLayer->destroyEditCommand();

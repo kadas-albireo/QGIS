@@ -472,7 +472,7 @@ void QgsExpressionBuilderWidget::fillFieldValues( const QString &fieldName, int 
   const QgsEditorWidgetSetup setup = fields.at( fieldIndex ).editorWidgetSetup();
   const QgsFieldFormatter *formatter = QgsApplication::fieldFormatterRegistry()->fieldFormatter( setup.type() );
 
-  QList<QVariant> values = mLayer->uniqueValues( fieldIndex, countLimit ).toList();
+  QList<QVariant> values = mLayer->uniqueValues( fieldIndex, countLimit ).values();
   std::sort( values.begin(), values.end() );
 
   mValuesModel->clear();

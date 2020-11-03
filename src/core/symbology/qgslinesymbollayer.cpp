@@ -1778,7 +1778,7 @@ void QgsMarkerLineSymbolLayer::startRender( QgsSymbolRenderContext &context )
   mMarker->setOpacity( context.opacity() );
 
   // if being rotated, it gets initialized with every line segment
-  QgsSymbol::RenderHints hints = nullptr;
+  QgsSymbol::RenderHints hints = QgsSymbol::RenderHints();
   if ( rotateSymbols() )
     hints |= QgsSymbol::DynamicRotation;
   mMarker->setRenderHints( hints );
@@ -2085,7 +2085,7 @@ void QgsHashedLineSymbolLayer::startRender( QgsSymbolRenderContext &context )
   mHashSymbol->setOpacity( context.opacity() );
 
   // if being rotated, it gets initialized with every line segment
-  QgsSymbol::RenderHints hints = nullptr;
+  QgsSymbol::RenderHints hints = QgsSymbol::RenderHints();
   if ( rotateSymbols() )
     hints |= QgsSymbol::DynamicRotation;
   mHashSymbol->setRenderHints( hints );

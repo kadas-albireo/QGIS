@@ -26,7 +26,6 @@
 
 #include <QPushButton>
 #include <QTextEdit>
-#include <QTime>
 #include <QMessageBox>
 #include <QSortFilterProxyModel>
 
@@ -337,7 +336,7 @@ void QgsCptCityColorRampDialog::pbtnLicenseDetails_pressed()
   descFile = mArchive->descFileName( path );
 
   // prepare dialog
-  QgsDialog dlg( this, nullptr, QDialogButtonBox::Close );
+  QgsDialog dlg( this, Qt::WindowFlags(), QDialogButtonBox::Close );
   QVBoxLayout *layout = dlg.layout();
   dlg.setWindowTitle( title );
   QTextEdit *textEdit = new QTextEdit( &dlg );

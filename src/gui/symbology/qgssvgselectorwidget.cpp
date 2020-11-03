@@ -32,7 +32,6 @@
 #include <QModelIndex>
 #include <QPixmapCache>
 #include <QStyle>
-#include <QTime>
 #include <QMenu>
 
 // QgsSvgSelectorLoader
@@ -279,7 +278,7 @@ QVariant QgsSvgSelectorListModel::data( const QModelIndex &index, int role ) con
   if ( role == Qt::DecorationRole ) // icon
   {
     QPixmap pixmap;
-    if ( !QPixmapCache::find( entry, pixmap ) )
+    if ( !QPixmapCache::find( entry, &pixmap ) )
     {
       pixmap = createPreview( entry );
       QPixmapCache::insert( entry, pixmap );
@@ -382,7 +381,7 @@ QgsSvgSelectorWidget::QgsSvgSelectorWidget( QWidget *parent )
 
   connect( mSvgSourceLineEdit, &QgsAbstractFileContentSourceLineEdit::sourceChanged, this, &QgsSvgSelectorWidget::svgSourceChanged );
 
-  mIconSize = std::max( 30, static_cast< int >( std::round( Qgis::UI_SCALE_FACTOR * fontMetrics().width( QStringLiteral( "XXXX" ) ) ) ) );
+  mIconSize = std::max( 30, static_cast< int >( std::round( Qgis::UI_SCALE_FACTOR * fontMetrics().horizontalAdvance( QStringLiteral( "XXXX" ) ) ) ) );
   mImagesListView->setGridSize( QSize( mIconSize * 1.2, mIconSize * 1.2 ) );
 
   mGroupsTreeView->setHeaderHidden( true );

@@ -21,7 +21,6 @@
 #include <QColor>
 #include <QPainter>
 #include <QImage>
-#include <QTime>
 #include <QCryptographicHash>
 #include <QByteArray>
 #include <QDebug>

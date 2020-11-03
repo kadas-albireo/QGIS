@@ -1391,7 +1391,7 @@ QStringList QgsStyle::findSymbols( StyleEntity type, const QString &qword )
     symbols << statement.columnAsText( 0 );
   }
 
-  return symbols.toList();
+  return symbols.values();
 }
 
 bool QgsStyle::tagSymbol( StyleEntity type, const QString &symbol, const QStringList &tags )
@@ -2296,7 +2296,7 @@ QStringList QgsStyle::symbolsOfSmartgroup( StyleEntity type, int id )
   }
 
   // return sorted, unique list
-  QStringList unique = symbols.toSet().toList();
+  QStringList unique = qgis::listToSet( symbols ).values();
   std::sort( unique.begin(), unique.end() );
   return unique;
 }

@@ -1256,7 +1256,7 @@ namespace QgsWms
                 uniqueValues.unite( vl->uniqueValues( endFieldIndex ) );
               }
               // sort unique values
-              QList<QVariant> values = uniqueValues.toList();
+              QList<QVariant> values = uniqueValues.values();
               std::sort( values.begin(), values.end() );
 
               QDomElement dimElem = doc.createElement( QStringLiteral( "Dimension" ) );
@@ -1769,7 +1769,7 @@ namespace QgsWms
       }
 
       QStringList outputCrsList = QgsServerProjectUtils::wmsOutputCrsList( *project );
-      appendCrsElementsToLayer( doc, groupElem, combinedCRSSet.toList(), outputCrsList );
+      appendCrsElementsToLayer( doc, groupElem, combinedCRSSet.values(), outputCrsList );
 
       QgsCoordinateReferenceSystem groupCRS = project->crs();
       if ( considerMapExtent )
@@ -1780,7 +1780,7 @@ namespace QgsWms
           combinedBBox = mapRect;
         }
       }
-      appendLayerBoundingBoxes( doc, groupElem, combinedBBox, groupCRS, combinedCRSSet.toList(), outputCrsList, project );
+      appendLayerBoundingBoxes( doc, groupElem, combinedBBox, groupCRS, combinedCRSSet.values(), outputCrsList, project );
 
     }
 

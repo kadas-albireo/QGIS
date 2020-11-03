@@ -248,5 +248,5 @@ QList<int> QgsMeshUtils::nativeFacesFromTriangles( const QList<int> &triangleInd
     const int nativeIndex = trianglesToNativeFaces[triangleIndex];
     nativeFaces.insert( nativeIndex );
   }
-  return nativeFaces.toList();
+  return nativeFaces.values();
 }

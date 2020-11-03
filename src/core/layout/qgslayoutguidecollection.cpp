@@ -195,7 +195,7 @@ QgsLayoutGuideCollection::QgsLayoutGuideCollection( QgsLayout *layout, QgsLayout
   , mPageCollection( pageCollection )
 {
   QFont f;
-  mHeaderSize = QFontMetrics( f ).width( QStringLiteral( "XX" ) );
+  mHeaderSize = QFontMetrics( f ).horizontalAdvance( QStringLiteral( "XX" ) );
 
   connect( mPageCollection, &QgsLayoutPageCollection::pageAboutToBeRemoved, this, &QgsLayoutGuideCollection::pageAboutToBeRemoved );
 }

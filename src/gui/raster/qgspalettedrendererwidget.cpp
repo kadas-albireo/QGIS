@@ -66,7 +66,7 @@ QgsPalettedRendererWidget::QgsPalettedRendererWidget( QgsRasterLayer *layer, con
 
   mSwatchDelegate = new QgsColorSwatchDelegate( this );
   mTreeView->setItemDelegateForColumn( QgsPalettedRendererModel::ColorColumn, mSwatchDelegate );
-  mTreeView->setColumnWidth( QgsPalettedRendererModel::ColorColumn, Qgis::UI_SCALE_FACTOR * fontMetrics().width( 'X' ) * 6.6 );
+  mTreeView->setColumnWidth( QgsPalettedRendererModel::ColorColumn, Qgis::UI_SCALE_FACTOR * fontMetrics().horizontalAdvance( 'X' ) * 6.6 );
   mTreeView->setContextMenuPolicy( Qt::CustomContextMenu );
   mTreeView->setSelectionMode( QAbstractItemView::ExtendedSelection );
   mTreeView->setDragEnabled( true );

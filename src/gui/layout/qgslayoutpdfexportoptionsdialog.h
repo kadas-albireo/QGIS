@@ -46,7 +46,7 @@ class GUI_EXPORT QgsLayoutPdfExportOptionsDialog: public QDialog, private Ui::Qg
     QgsLayoutPdfExportOptionsDialog( QWidget *parent = nullptr,
                                      bool allowGeoPdfExport = true,
                                      const QString &geoPdfReason = QString(),
-                                     Qt::WindowFlags flags = nullptr );
+                                     Qt::WindowFlags flags = Qt::WindowFlags() );
 
     void setTextRenderFormat( QgsRenderContext::TextRenderFormat format );
     QgsRenderContext::TextRenderFormat textRenderFormat() const;

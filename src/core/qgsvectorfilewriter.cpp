@@ -2989,7 +2989,7 @@ QgsVectorFileWriter::WriterError QgsVectorFileWriter::writeAsVectorFormatV2( Pre
     }
   }
 
-  std::unique_ptr< QgsVectorFileWriter > writer( create( fileName, details.outputFields, destWkbType, details.outputCrs, transformContext, options, nullptr, newFilename, newLayer ) );
+  std::unique_ptr< QgsVectorFileWriter > writer( create( fileName, details.outputFields, destWkbType, details.outputCrs, transformContext, options, QgsFeatureSink::SinkFlags(), newFilename, newLayer ) );
   writer->setSymbologyScale( options.symbologyScale );
 
   if ( newFilename )
@@ -3296,7 +3296,7 @@ QStringList QgsVectorFileWriter::supportedFormatExtensions( const VectorFormatOp
     }
   }
 
-  QStringList extensionList = extensions.toList();
+  QStringList extensionList = extensions.values();
 
   std::sort( extensionList.begin(), extensionList.end(), [options]( const QString & a, const QString & b ) -> bool
   {
@@ -3813,9 +3813,9 @@ QgsVectorFileWriter::EditionCapabilities QgsVectorFileWriter::editionCapabilitie
   OGRSFDriverH hDriver = nullptr;
   gdal::ogr_datasource_unique_ptr hDS( myOGROpen( datasetName.toUtf8().constData(), TRUE, &hDriver ) );
   if ( !hDS )
-    return nullptr;
+    return QgsVectorFileWriter::EditionCapabilities();
   QString drvName = OGR_Dr_GetName( hDriver );
-  QgsVectorFileWriter::EditionCapabilities caps = nullptr;
+  QgsVectorFileWriter::EditionCapabilities caps;
   if ( OGR_DS_TestCapability( hDS.get(), ODsCCreateLayer ) )
   {
     // Shapefile driver returns True for a "foo.shp" dataset name,

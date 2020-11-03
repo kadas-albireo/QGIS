@@ -360,7 +360,7 @@ void QgsSnappingUtils::prepareIndex( const QList<LayerAndAreaOfInterest> &layers
   if ( !layersToIndex.isEmpty() )
   {
     // build indexes
-    QTime t;
+    QElapsedTimer t;
     t.start();
     int i = 0;
     prepareIndexStarting( layersToIndex.count() );
@@ -368,7 +368,7 @@ void QgsSnappingUtils::prepareIndex( const QList<LayerAndAreaOfInterest> &layers
     for ( const LayerAndAreaOfInterest &entry : constLayersToIndex )
     {
       QgsVectorLayer *vl = entry.first;
-      QTime tt;
+      QElapsedTimer tt;
       tt.start();
 
       QgsPointLocator *loc = locatorForLayer( vl );

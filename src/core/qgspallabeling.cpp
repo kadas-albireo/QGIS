@@ -36,7 +36,7 @@
 #include <QByteArray>
 #include <QString>
 #include <QFontMetrics>
-#include <QTime>
+#include <QElapsedTimer>
 #include <QPainter>
 #include <QDesktopWidget>
 

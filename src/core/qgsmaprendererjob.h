@@ -22,7 +22,7 @@
 #include <QImage>
 #include <QPainter>
 #include <QObject>
-#include <QTime>
+#include <QElapsedTimer>
 
 #include "qgsrendercontext.h"
 
@@ -261,7 +261,7 @@ class CORE_EXPORT QgsMapRendererJob : public QObject
   protected:
 
     QgsMapSettings mSettings;
-    QTime mRenderingStart;
+    QElapsedTimer mRenderingStart;
     Errors mErrors;
 
     QgsMapRendererCache *mCache = nullptr;

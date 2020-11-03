@@ -752,7 +752,7 @@ QList<QgsServerQueryStringParameter> QgsWfs3CollectionsItemsHandler::parameters(
                                         10 };
   limit.setCustomValidator( [ = ]( const QgsServerApiContext &, QVariant & value ) -> bool
   {
-    return value >= 0 && value <= maxLimit;   // TODO: make this configurable!
+    return value.toInt() >= 0 && value.toInt() <= maxLimit;   // TODO: make this configurable!
   } );
   params.push_back( limit );
 
@@ -1123,8 +1123,10 @@ void QgsWfs3CollectionsItemsHandler::handleRequest( const QgsServerApiContext &c
 
     // Url without offset and limit
     QUrl cleanedUrl { url };
-    cleanedUrl.removeQueryItem( QStringLiteral( "limit" ) );
-    cleanedUrl.removeQueryItem( QStringLiteral( "offset" ) );
+    QUrlQuery query( cleanedUrl );
+    query.removeQueryItem( QStringLiteral( "limit" ) );
+    query.removeQueryItem( QStringLiteral( "offset" ) );
+    cleanedUrl.setQuery( query );
 
     QString cleanedUrlAsString { cleanedUrl.toString() };
 

@@ -339,7 +339,7 @@ Qt::ItemFlags QgsMapLayerModel::flags( const QModelIndex &index ) const
 {
   if ( !index.isValid() )
   {
-    return nullptr;
+    return Qt::ItemFlags();
   }
 
   bool isEmpty = index.row() == 0 && mAllowEmpty;

@@ -22,7 +22,6 @@
 #include <QCoreApplication>
 #include <QColor>
 #include <QDate>
-#include <QTime>
 #include <QLocale>
 #include <QDateTime>
 #include "qgsconfig.h"

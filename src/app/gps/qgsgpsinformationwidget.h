@@ -49,7 +49,7 @@ class APP_EXPORT QgsGpsInformationWidget: public QWidget, private Ui::QgsGpsInfo
 {
     Q_OBJECT
   public:
-    QgsGpsInformationWidget( QgsMapCanvas *mapCanvas, QWidget *parent = nullptr, Qt::WindowFlags f = nullptr );
+    QgsGpsInformationWidget( QgsMapCanvas *mapCanvas, QWidget *parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags() );
     ~QgsGpsInformationWidget() override;
   private slots:
     void mConnectButton_toggled( bool flag );

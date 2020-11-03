@@ -173,7 +173,7 @@ class CORE_EXPORT QgsAuthMethod : public QObject
      * \note Non-public since this is an abstract base class
      */
     explicit QgsAuthMethod()
-      : mExpansions( QgsAuthMethod::Expansions( nullptr ) )
+      : mExpansions( QgsAuthMethod::Expansions() )
       , mDataProviders( QStringList() )
       , mMutex( QMutex::RecursionMode::Recursive )
     {}

@@ -81,7 +81,7 @@ void QgsColorSchemeList::removeSelection()
     rows << index.row();
   }
   //remove duplicates
-  QList<int> rowsToRemove = QList<int>::fromSet( rows.toSet() );
+  QList<int> rowsToRemove = qgis::listToSet( rows ).values();
 
   //remove rows in descending order
   std::sort( rowsToRemove.begin(), rowsToRemove.end(), std::greater<int>() );
@@ -124,7 +124,7 @@ void QgsColorSchemeList::copyColors()
     rows << index.row();
   }
   //remove duplicates
-  QList<int> rowsToCopy = QList<int>::fromSet( rows.toSet() );
+  QList<int> rowsToCopy = qgis::listToSet( rows ).values();
 
   QgsNamedColorList colorsToCopy;
   const auto constRowsToCopy = rowsToCopy;
@@ -208,7 +208,7 @@ void QgsColorSchemeList::keyPressEvent( QKeyEvent *event )
       rows << index.row();
     }
     //remove duplicates
-    QList<int> rowsToRemove = QList<int>::fromSet( rows.toSet() );
+    QList<int> rowsToRemove = qgis::listToSet( rows ).values();
 
     //remove rows in descending order
     std::sort( rowsToRemove.begin(), rowsToRemove.end(), std::greater<int>() );
@@ -710,7 +710,7 @@ void QgsColorSwatchDelegate::paint( QPainter *painter, const QStyleOptionViewIte
   }
 
   QRect rect = option.rect;
-  const int iconSize = Qgis::UI_SCALE_FACTOR * option.fontMetrics.width( 'X' ) * 4;
+  const int iconSize = Qgis::UI_SCALE_FACTOR * option.fontMetrics.horizontalAdvance( 'X' ) * 4;
   const int cornerSize = iconSize / 6;
   //center it
   rect.setLeft( option.rect.center().x() - iconSize / 2 );
@@ -749,7 +749,7 @@ QSize QgsColorSwatchDelegate::sizeHint( const QStyleOptionViewItem &option, cons
 {
   Q_UNUSED( index )
 
-  const int iconSize = Qgis::UI_SCALE_FACTOR * option.fontMetrics.width( 'X' ) * 4;
+  const int iconSize = Qgis::UI_SCALE_FACTOR * option.fontMetrics.horizontalAdvance( 'X' ) * 4;
   return QSize( iconSize, iconSize * 32 / 30.0 );
 }
 

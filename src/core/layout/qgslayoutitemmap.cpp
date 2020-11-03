@@ -2549,7 +2549,7 @@ void QgsLayoutItemMap::createStagedRenderJob( const QgsRectangle &extent, const 
   mStagedRendererJob = qgis::make_unique< QgsMapRendererStagedRenderJob >( settings,
                        mLayout && mLayout->renderContext().flags() & QgsLayoutRenderContext::FlagRenderLabelsByMapLayer
                        ? QgsMapRendererStagedRenderJob::RenderLabelsByMapLayer
-                       : QgsMapRendererStagedRenderJob::Flags( nullptr ) );
+                       : QgsMapRendererStagedRenderJob::Flags() );
   mStagedRendererJob->start();
 }
 

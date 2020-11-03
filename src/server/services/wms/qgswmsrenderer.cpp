@@ -2853,7 +2853,7 @@ namespace QgsWms
             uniqueValues.unite( layer->uniqueValues( endFieldIndex ) );
           }
           // sort unique values
-          QList<QVariant> values = uniqueValues.toList();
+          QList<QVariant> values = uniqueValues.values();
           std::sort( values.begin(), values.end() );
           if ( dim.defaultDisplayType == QgsVectorLayerServerProperties::WmsDimensionInfo::MinValue )
           {

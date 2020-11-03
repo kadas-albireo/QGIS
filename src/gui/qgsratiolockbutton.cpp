@@ -27,7 +27,7 @@ QgsRatioLockButton::QgsRatioLockButton( QWidget *parent )
   : QToolButton( parent )
 {
   setMinimumSize( QSize( 24, 24 ) );
-  setMaximumWidth( fontMetrics().width( QStringLiteral( "000" ) ) );
+  setMaximumWidth( fontMetrics().horizontalAdvance( QStringLiteral( "000" ) ) );
   setCheckable( true );
   setAutoRaise( true );
   connect( this, &QPushButton::clicked, this, &QgsRatioLockButton::buttonClicked );

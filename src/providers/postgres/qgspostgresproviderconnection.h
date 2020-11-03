@@ -46,7 +46,7 @@ class QgsPostgresProviderConnection : public QgsAbstractDatabaseProviderConnecti
     QList<QVariantList> executeSql( const QString &sql ) const override;
     void vacuum( const QString &schema, const QString &name ) const override;
     QList<QgsAbstractDatabaseProviderConnection::TableProperty> tables( const QString &schema,
-        const TableFlags &flags = nullptr ) const override;
+        const TableFlags &flags = TableFlags() ) const override;
     QStringList schemas( ) const override;
     void store( const QString &name ) const override;
     void remove( const QString &name ) const override;

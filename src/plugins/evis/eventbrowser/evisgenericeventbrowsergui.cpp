@@ -284,11 +284,11 @@ bool eVisGenericEventBrowserGui::initBrowser()
   if ( 0 == mVectorLayer->selectedFeatureCount() ) //if nothing is selected select everything
   {
     mVectorLayer->invertSelection();
-    mFeatureIds = mVectorLayer->selectedFeatureIds().toList();
+    mFeatureIds = mVectorLayer->selectedFeatureIds().values();
   }
   else //use selected features
   {
-    mFeatureIds = mVectorLayer->selectedFeatureIds().toList();
+    mFeatureIds = mVectorLayer->selectedFeatureIds().values();
   }
 
   if ( 0 == mFeatureIds.size() )
@@ -1183,7 +1183,7 @@ void eVisGenericEventBrowserGui::renderSymbol( QPainter *painter )
 
       wm.rotate( myBearing );
 
-      p.setWorldMatrix( wm );
+      p.setWorldTransform( QTransform( wm ) );
       p.drawPixmap( -mPointerSymbol.width() / 2, -mPointerSymbol.height() / 2, mPointerSymbol );
 
       int xShift = static_cast<int>( myPoint.x() ) - ( myTempPixmap.width() / 2 );

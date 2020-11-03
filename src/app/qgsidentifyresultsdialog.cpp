@@ -37,6 +37,7 @@
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QRegExp>
+#include <QScreen>
 
 //graph
 #include <qwt_plot.h>
@@ -360,7 +361,7 @@ QgsIdentifyResultsDialog::QgsIdentifyResultsDialog( QgsMapCanvas *canvas, QWidge
   mExpandNewAction->setChecked( mySettings.value( QStringLiteral( "Map/identifyExpand" ), false ).toBool() );
   mActionCopy->setEnabled( false );
   lstResults->setColumnCount( 2 );
-  lstResults->sortByColumn( -1 );
+  lstResults->sortByColumn( -1, Qt::AscendingOrder );
   setColumnText( 0, tr( "Feature" ) );
   setColumnText( 1, tr( "Value" ) );
 
@@ -584,7 +585,7 @@ void QgsIdentifyResultsDialog::addFeature( QgsVectorLayer *vlayer, const QgsFeat
       QTreeWidgetItem *twi = new QTreeWidgetItem( QStringList() << QString() << action->text() );
       twi->setIcon( 0, QgsApplication::getThemeIcon( QStringLiteral( "/mAction.svg" ) ) );
       twi->setData( 0, Qt::UserRole, "map_layer_action" );
-      twi->setData( 0, Qt::UserRole + 1, qVariantFromValue( qobject_cast<QObject *>( action ) ) );
+      twi->setData( 0, Qt::UserRole + 1, QVariant::fromValue( qobject_cast<QObject *>( action ) ) );
       actionItem->addChild( twi );
 
       connect( action, &QObject::destroyed, this, &QgsIdentifyResultsDialog::mapLayerActionDestroyed );
@@ -834,7 +835,7 @@ void QgsIdentifyResultsDialog::addFeature( QgsRasterLayer *layer,
       if ( !( QgsRasterDataProvider::identifyFormatToCapability( f ) & capabilities ) )
         continue;
       formatCombo->addItem( QgsRasterDataProvider::identifyFormatLabel( f ), f );
-      formatCombo->setItemData( formatCombo->count() - 1, qVariantFromValue( qobject_cast<QObject *>( layer ) ), Qt::UserRole + 1 );
+      formatCombo->setItemData( formatCombo->count() - 1, QVariant::fromValue( qobject_cast<QObject *>( layer ) ), Qt::UserRole + 1 );
       if ( currentFormat == f )
         formatCombo->setCurrentIndex( formatCombo->count() - 1 );
     }
@@ -951,7 +952,7 @@ void QgsIdentifyResultsDialog::addFeature( QgsRasterLayer *layer,
     QgsIdentifyResultsWebViewItem *attrItem = new QgsIdentifyResultsWebViewItem( lstResults );
 #ifdef WITH_QTWEBKIT
     attrItem->webView()->page()->setLinkDelegationPolicy( QWebPage::DelegateExternalLinks );
-    const int horizontalDpi = qApp->desktop()->screen()->logicalDpiX();
+    const int horizontalDpi = logicalDpiX();
     // Adjust zoom: text is ok, but HTML seems rather big at least on Linux/KDE
     if ( horizontalDpi > 96 )
     {
@@ -1355,7 +1356,7 @@ void QgsIdentifyResultsDialog::clear()
   }
 
   lstResults->clear();
-  lstResults->sortByColumn( -1 );
+  lstResults->sortByColumn( -1, Qt::AscendingOrder );
   clearHighlights();
 
   tblResults->clearContents();

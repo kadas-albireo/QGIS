@@ -506,7 +506,7 @@ void QgsRelationReferenceWidget::init()
         cb->setProperty( "Field", fieldName );
         cb->setProperty( "FieldAlias", mReferencedLayer->attributeDisplayName( idx ) );
         mFilterComboBoxes << cb;
-        QVariantList uniqueValues = mReferencedLayer->uniqueValues( idx ).toList();
+        QVariantList uniqueValues = mReferencedLayer->uniqueValues( idx ).values();
         cb->addItem( mReferencedLayer->attributeDisplayName( idx ) );
         QVariant nullValue = QgsApplication::nullRepresentation();
         cb->addItem( nullValue.toString(), QVariant( mReferencedLayer->fields().at( idx ).type() ) );

@@ -535,7 +535,7 @@ void QgsProcessingAlgorithmDialogBase::processEvents()
   // whereas on Linux we must allow for far more iterations.
   // For safety limit the number of iterations
   int nIters = 0;
-  while ( QCoreApplication::hasPendingEvents() && ++nIters < 100 )
+  while ( ++nIters < 100 )
 #endif
   {
     QCoreApplication::processEvents();

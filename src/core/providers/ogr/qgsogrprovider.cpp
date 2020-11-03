@@ -413,7 +413,7 @@ QgsVectorLayerExporter::ExportError QgsOgrProvider::createEmptyLayer( const QStr
   saveOptions.layerOptions = layerOptions;
   saveOptions.actionOnExistingFile = action;
   saveOptions.symbologyExport = QgsVectorFileWriter::NoSymbology;
-  std::unique_ptr< QgsVectorFileWriter > writer( QgsVectorFileWriter::create( uri, fields, wkbType, srs, QgsCoordinateTransformContext(), saveOptions, nullptr, nullptr, &newLayerName ) );
+  std::unique_ptr< QgsVectorFileWriter > writer( QgsVectorFileWriter::create( uri, fields, wkbType, srs, QgsCoordinateTransformContext(), saveOptions, QgsFeatureSink::SinkFlags(), nullptr, &newLayerName ) );
   layerName = newLayerName;
 
   QgsVectorFileWriter::WriterError error = writer->hasError();
@@ -1948,7 +1948,7 @@ bool QgsOgrProvider::deleteAttributes( const QgsAttributeIds &attributes )
     return false;
 
   bool res = true;
-  QList<int> attrsLst = attributes.toList();
+  QList<int> attrsLst = attributes.values();
   // sort in descending order
   std::sort( attrsLst.begin(), attrsLst.end(), std::greater<int>() );
   const auto constAttrsLst = attrsLst;
@@ -2589,7 +2589,7 @@ QgsVectorDataProvider::Capabilities QgsOgrProvider::capabilities() const
 
 void QgsOgrProvider::computeCapabilities()
 {
-  QgsVectorDataProvider::Capabilities ability = nullptr;
+  QgsVectorDataProvider::Capabilities ability;
   bool updateModeActivated = false;
 
   // collect abilities reported by OGR

@@ -57,7 +57,7 @@ QgsNewNameDialog::QgsNewNameDialog( const QString &source, const QString &initia
     QRegExpValidator *validator = new QRegExpValidator( regexp, this );
     mLineEdit->setValidator( validator );
   }
-  mLineEdit->setMinimumWidth( mLineEdit->fontMetrics().width( QStringLiteral( "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" ) ) );
+  mLineEdit->setMinimumWidth( mLineEdit->fontMetrics().horizontalAdvance( QStringLiteral( "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" ) ) );
   connect( mLineEdit, &QLineEdit::textChanged, this, &QgsNewNameDialog::nameChanged );
   connect( mLineEdit, &QLineEdit::textChanged, this, &QgsNewNameDialog::newNameChanged );
   layout()->addWidget( mLineEdit );

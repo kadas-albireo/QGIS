@@ -233,11 +233,11 @@ QgsEllipsoidUtils::EllipsoidParameters QgsEllipsoidUtils::ellipsoidParameters( c
     params.semiMinor = semiMinor;
     params.inverseFlattening = invFlattening;
     if ( !semiMinorComputed )
-      params.crs = QgsCoordinateReferenceSystem::fromProj4( QStringLiteral( "+proj=longlat +a=%1 +b=%2 +no_defs +type=crs" ).arg( params.semiMajor, 0, 'g', 17 ).arg( params.semiMinor, 0, 'g', 17 ) );
+      params.crs = QgsCoordinateReferenceSystem::fromProj( QStringLiteral( "+proj=longlat +a=%1 +b=%2 +no_defs +type=crs" ).arg( params.semiMajor, 0, 'g', 17 ).arg( params.semiMinor, 0, 'g', 17 ) );
     else if ( !qgsDoubleNear( params.inverseFlattening, 0.0 ) )
-      params.crs = QgsCoordinateReferenceSystem::fromProj4( QStringLiteral( "+proj=longlat +a=%1 +rf=%2 +no_defs +type=crs" ).arg( params.semiMajor, 0, 'g', 17 ).arg( params.inverseFlattening, 0, 'g', 17 ) );
+      params.crs = QgsCoordinateReferenceSystem::fromProj( QStringLiteral( "+proj=longlat +a=%1 +rf=%2 +no_defs +type=crs" ).arg( params.semiMajor, 0, 'g', 17 ).arg( params.inverseFlattening, 0, 'g', 17 ) );
     else
-      params.crs = QgsCoordinateReferenceSystem::fromProj4( QStringLiteral( "+proj=longlat +a=%1 +no_defs +type=crs" ).arg( params.semiMajor, 0, 'g', 17 ) );
+      params.crs = QgsCoordinateReferenceSystem::fromProj( QStringLiteral( "+proj=longlat +a=%1 +no_defs +type=crs" ).arg( params.semiMajor, 0, 'g', 17 ) );
   }
   else
   {

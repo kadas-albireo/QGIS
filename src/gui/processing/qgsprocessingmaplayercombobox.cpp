@@ -54,7 +54,7 @@ QgsProcessingMapLayerComboBox::QgsProcessingMapLayerComboBox( const QgsProcessin
   vl->setSpacing( 6 );
   vl->addLayout( layout );
 
-  QgsMapLayerProxyModel::Filters filters = nullptr;
+  QgsMapLayerProxyModel::Filters filters;
 
   if ( mParameter->type() == QgsProcessingParameterFeatureSource::typeName() )
   {

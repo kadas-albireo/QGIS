@@ -221,7 +221,8 @@ QString QgsWFSFeatureDownloader::sanitizeFilter( QString filter )
 QUrl QgsWFSFeatureDownloader::buildURL( qint64 startIndex, int maxFeatures, bool forHits )
 {
   QUrl getFeatureUrl( mShared->mURI.requestUrl( QStringLiteral( "GetFeature" ) ) );
-  getFeatureUrl.addQueryItem( QStringLiteral( "VERSION" ),  mShared->mWFSVersion );
+  QUrlQuery query( getFeatureUrl );
+  query.addQueryItem( QStringLiteral( "VERSION" ),  mShared->mWFSVersion );
 
   QString typenames;
   QString namespaces;
@@ -240,12 +241,12 @@ QUrl QgsWFSFeatureDownloader::buildURL( qint64 startIndex, int maxFeatures, bool
     }
   }
   if ( mShared->mWFSVersion.startsWith( QLatin1String( "2.0" ) ) )
-    getFeatureUrl.addQueryItem( QStringLiteral( "TYPENAMES" ),  typenames );
-  getFeatureUrl.addQueryItem( QStringLiteral( "TYPENAME" ),  typenames );
+    query.addQueryItem( QStringLiteral( "TYPENAMES" ),  typenames );
+  query.addQueryItem( QStringLiteral( "TYPENAME" ),  typenames );
 
   if ( forHits )
   {
-    getFeatureUrl.addQueryItem( QStringLiteral( "RESULTTYPE" ), QStringLiteral( "hits" ) );
+    query.addQueryItem( QStringLiteral( "RESULTTYPE" ), QStringLiteral( "hits" ) );
   }
   else if ( maxFeatures > 0 )
   {
@@ -257,17 +258,17 @@ QUrl QgsWFSFeatureDownloader::buildURL( qint64 startIndex, int maxFeatures, bool
       // For example http://demo.opengeo.org/geoserver/wfs?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAMES=ne:ne_10m_admin_0_countries&STARTINDEX=0&COUNT=253
       // doesn't include ne_10m_admin_0_countries.99, as expected since it is
       // at index 254.
-      getFeatureUrl.addQueryItem( QStringLiteral( "STARTINDEX" ), QString::number( startIndex ) );
+      query.addQueryItem( QStringLiteral( "STARTINDEX" ), QString::number( startIndex ) );
     }
     if ( mShared->mWFSVersion.startsWith( QLatin1String( "2.0" ) ) )
-      getFeatureUrl.addQueryItem( QStringLiteral( "COUNT" ), QString::number( maxFeatures ) );
+      query.addQueryItem( QStringLiteral( "COUNT" ), QString::number( maxFeatures ) );
     else
-      getFeatureUrl.addQueryItem( QStringLiteral( "MAXFEATURES" ), QString::number( maxFeatures ) );
+      query.addQueryItem( QStringLiteral( "MAXFEATURES" ), QString::number( maxFeatures ) );
   }
   QString srsName( mShared->srsName() );
   if ( !srsName.isEmpty() && !forHits )
   {
-    getFeatureUrl.addQueryItem( QStringLiteral( "SRSNAME" ), srsName );
+    query.addQueryItem( QStringLiteral( "SRSNAME" ), srsName );
   }
 
   // In case we must issue a BBOX and we have a filter, we must combine
@@ -322,7 +323,7 @@ QUrl QgsWFSFeatureDownloader::buildURL( qint64 startIndex, int maxFeatures, bool
     andElem.appendChild( filterNode );
     doc.firstChildElement().appendChild( andElem );
 
-    getFeatureUrl.addQueryItem( QStringLiteral( "FILTER" ), sanitizeFilter( doc.toString() ) );
+    query.addQueryItem( QStringLiteral( "FILTER" ), sanitizeFilter( doc.toString() ) );
   }
   else if ( !mShared->mRect.isNull() )
   {
@@ -359,21 +360,21 @@ QUrl QgsWFSFeatureDownloader::buildURL( qint64 startIndex, int maxFeatures, bool
       // it. See #15464
       bbox += "," + mShared->srsName();
     }
-    getFeatureUrl.addQueryItem( QStringLiteral( "BBOX" ),  bbox );
+    query.addQueryItem( QStringLiteral( "BBOX" ),  bbox );
   }
   else if ( !mShared->mWFSFilter.isEmpty() )
   {
-    getFeatureUrl.addQueryItem( QStringLiteral( "FILTER" ), sanitizeFilter( mShared->mWFSFilter ) );
+    query.addQueryItem( QStringLiteral( "FILTER" ), sanitizeFilter( mShared->mWFSFilter ) );
   }
 
   if ( !mShared->mSortBy.isEmpty() && !forHits )
   {
-    getFeatureUrl.addQueryItem( QStringLiteral( "SORTBY" ), mShared->mSortBy );
+    query.addQueryItem( QStringLiteral( "SORTBY" ), mShared->mSortBy );
   }
 
   if ( !forHits && !mShared->mURI.outputFormat().isEmpty() )
   {
-    getFeatureUrl.addQueryItem( QStringLiteral( "OUTPUTFORMAT" ), mShared->mURI.outputFormat() );
+    query.addQueryItem( QStringLiteral( "OUTPUTFORMAT" ), mShared->mURI.outputFormat() );
   }
   else if ( !forHits && mShared->mWFSVersion.startsWith( QLatin1String( "1.0" ) ) )
   {
@@ -390,8 +391,8 @@ QUrl QgsWFSFeatureDownloader::buildURL( qint64 startIndex, int maxFeatures, bool
     {
       if ( mShared->mCaps.outputFormats.contains( format ) )
       {
-        getFeatureUrl.addQueryItem( QStringLiteral( "OUTPUTFORMAT" ),
-                                    format );
+        query.addQueryItem( QStringLiteral( "OUTPUTFORMAT" ),
+                            format );
         break;
       }
     }
@@ -400,12 +401,13 @@ QUrl QgsWFSFeatureDownloader::buildURL( qint64 startIndex, int maxFeatures, bool
   if ( !namespaces.isEmpty() )
   {
     if ( mShared->mWFSVersion.startsWith( QLatin1String( "2.0" ) ) )
-      getFeatureUrl.addQueryItem( QStringLiteral( "NAMESPACES" ), namespaces );
-    getFeatureUrl.addQueryItem( QStringLiteral( "NAMESPACE" ), namespaces );
+      query.addQueryItem( QStringLiteral( "NAMESPACES" ), namespaces );
+    query.addQueryItem( QStringLiteral( "NAMESPACE" ), namespaces );
   }
 
   QgsDebugMsgLevel( QStringLiteral( "WFS GetFeature URL: %1" ).arg( getFeatureUrl.toDisplayString( ) ), 2 );
 
+  getFeatureUrl.setQuery( query );
   return getFeatureUrl;
 }
 
@@ -526,7 +528,9 @@ void QgsWFSFeatureDownloader::run( bool serializeFeatures, int maxFeatures )
     // Small hack for testing purposes
     if ( retryIter > 0 && url.toString().contains( QLatin1String( "fake_qgis_http_endpoint" ) ) )
     {
-      url.addQueryItem( QStringLiteral( "RETRY" ), QString::number( retryIter ) );
+      QUrlQuery query( url );
+      query.addQueryItem( QStringLiteral( "RETRY" ), QString::number( retryIter ) );
+      url.setQuery( query );
     }
 
     sendGET( url,
@@ -1378,7 +1382,7 @@ bool QgsWFSFeatureIterator::fetchFeature( QgsFeature &f )
     // - or new features to be notified
     // - or end of download being notified
     // - or interruption checker to notify cancellation
-    QTime timeRequestTimeout;
+    QElapsedTimer timeRequestTimeout;
     const int requestTimeout = mRequest.timeout();
     if ( requestTimeout > 0 )
       timeRequestTimeout.start();
@@ -1389,7 +1393,7 @@ bool QgsWFSFeatureIterator::fetchFeature( QgsFeature &f )
       {
         break;
       }
-      const int delayCheckInterruption = 50;
+      const qint64 delayCheckInterruption = 50;
       const int timeout = ( requestTimeout > 0 ) ?
                           std::min( requestTimeout - timeRequestTimeout.elapsed(), delayCheckInterruption ) :
                           delayCheckInterruption;

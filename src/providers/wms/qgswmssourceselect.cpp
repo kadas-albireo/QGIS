@@ -778,9 +778,9 @@ void QgsWMSSourceSelect::collectNamedLayers( QTreeWidgetItem *item, QStringList 
     titles << titleName;
 
     if ( mCRSs.isEmpty() )
-      mCRSs = item->data( 0, Qt::UserRole + 2 ).toStringList().toSet();
+      mCRSs = qgis::listToSet( item->data( 0, Qt::UserRole + 2 ).toStringList() );
     else
-      mCRSs.intersect( item->data( 0, Qt::UserRole + 2 ).toStringList().toSet() );
+      mCRSs.intersect( qgis::listToSet( item->data( 0, Qt::UserRole + 2 ).toStringList() ) );
   }
 }
 
@@ -824,9 +824,9 @@ void QgsWMSSourceSelect::lstLayers_itemSelectionChanged()
       styles << QString();
       titles << titleName;
       if ( mCRSs.isEmpty() )
-        mCRSs = item->data( 0, Qt::UserRole + 2 ).toStringList().toSet();
+        mCRSs = qgis::listToSet( item->data( 0, Qt::UserRole + 2 ).toStringList() );
       else
-        mCRSs.intersect( item->data( 0, Qt::UserRole + 2 ).toStringList().toSet() );
+        mCRSs.intersect( qgis::listToSet( item->data( 0, Qt::UserRole + 2 ).toStringList() ) );
     }
     else
     {
@@ -835,9 +835,9 @@ void QgsWMSSourceSelect::lstLayers_itemSelectionChanged()
       styles << styleName;
       titles << titleName;
       if ( mCRSs.isEmpty() )
-        mCRSs = item->parent()->data( 0, Qt::UserRole + 2 ).toStringList().toSet();
+        mCRSs = qgis::listToSet( item->parent()->data( 0, Qt::UserRole + 2 ).toStringList() );
       else
-        mCRSs.intersect( item->parent()->data( 0, Qt::UserRole + 2 ).toStringList().toSet() );
+        mCRSs.intersect( qgis::listToSet( item->parent()->data( 0, Qt::UserRole + 2 ).toStringList() ) );
     }
   }
 

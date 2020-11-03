@@ -141,7 +141,7 @@ QVariant QgsRelationReferenceFieldFormatter::createCache( QgsVectorLayer *layer,
 
   QgsFeatureRequest request;
   request.setFlags( QgsFeatureRequest::NoGeometry );
-  QgsAttributeList requiredAttributes = expr.referencedAttributeIndexes( referencedLayer->fields() ).toList();
+  QgsAttributeList requiredAttributes = expr.referencedAttributeIndexes( referencedLayer->fields() ).values();
   requiredAttributes << referencedFieldIdx;
   request.setSubsetOfAttributes( requiredAttributes );
   QgsFeature feature;

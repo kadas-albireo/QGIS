@@ -410,7 +410,7 @@ QStringList QgsExpressionContext::variableNames() const
   {
     names << scope->variableNames();
   }
-  return names.toSet().toList();
+  return qgis::listToSet( names ).values();
 }
 
 QStringList QgsExpressionContext::filteredVariableNames() const
@@ -466,7 +466,7 @@ QStringList QgsExpressionContext::functionNames() const
   {
     result << scope->functionNames();
   }
-  result = result.toSet().toList();
+  result = qgis::listToSet( result ).values();
   result.sort();
   return result;
 }

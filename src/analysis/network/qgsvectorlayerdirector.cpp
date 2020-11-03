@@ -85,7 +85,7 @@ QgsAttributeList QgsVectorLayerDirector::requiredAttributes() const
   {
     attrs.unite( strategy->requiredAttributes() );
   }
-  return attrs.toList();
+  return attrs.values();
 }
 
 QgsVectorLayerDirector::Direction QgsVectorLayerDirector::directionForFeature( const QgsFeature &feature ) const

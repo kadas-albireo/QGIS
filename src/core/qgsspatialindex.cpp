@@ -162,7 +162,7 @@ class QgsFeatureIteratorDataStream : public IDataStream
 {
   public:
     //! constructor - needs to load all data to a vector for later access when bulk loading
-    explicit QgsFeatureIteratorDataStream( const QgsFeatureIterator &fi, QgsFeedback *feedback = nullptr, QgsSpatialIndex::Flags flags = nullptr )
+    explicit QgsFeatureIteratorDataStream( const QgsFeatureIterator &fi, QgsFeedback *feedback = nullptr, QgsSpatialIndex::Flags flags = QgsSpatialIndex::Flags() )
       : mFi( fi )
       , mFeedback( feedback )
       , mFlags( flags )
@@ -220,7 +220,7 @@ class QgsFeatureIteratorDataStream : public IDataStream
     QgsFeatureIterator mFi;
     RTree::Data *mNextData = nullptr;
     QgsFeedback *mFeedback = nullptr;
-    QgsSpatialIndex::Flags mFlags = nullptr;
+    QgsSpatialIndex::Flags mFlags;
 
 };
 
@@ -240,7 +240,7 @@ class QgsSpatialIndexData : public QSharedData
       initTree();
     }
 
-    QgsSpatialIndex::Flags mFlags = nullptr;
+    QgsSpatialIndex::Flags mFlags;
 
     QHash< QgsFeatureId, QgsGeometry > mGeometries;
 
@@ -252,7 +252,7 @@ class QgsSpatialIndexData : public QSharedData
      * of \a feedback is not transferred, and callers must take care that the lifetime of feedback exceeds
      * that of the spatial index construction.
      */
-    explicit QgsSpatialIndexData( const QgsFeatureIterator &fi, QgsFeedback *feedback = nullptr, QgsSpatialIndex::Flags flags = nullptr )
+    explicit QgsSpatialIndexData( const QgsFeatureIterator &fi, QgsFeedback *feedback = nullptr, QgsSpatialIndex::Flags flags = QgsSpatialIndex::Flags() )
       : mFlags( flags )
     {
       QgsFeatureIteratorDataStream fids( fi, feedback, mFlags );

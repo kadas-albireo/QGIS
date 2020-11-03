@@ -19,7 +19,6 @@
 #include <typeinfo>
 
 #include <QByteArray>
-#include <QTime>
 #include <QStringList>
 
 #include "qgslogger.h"

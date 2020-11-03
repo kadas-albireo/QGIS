@@ -111,7 +111,7 @@ void QgsFeatureListViewDelegate::paint( QPainter *painter, const QStyleOptionVie
   if ( conditionalIcon.isValid() )
   {
     const QPixmap pixmap = conditionalIcon.value< QPixmap >();
-    iconLayoutBounds.moveLeft( iconLayoutBounds.x() + icon.width() + QFontMetrics( textOption.font ).width( 'X' ) );
+    iconLayoutBounds.moveLeft( iconLayoutBounds.x() + icon.width() + QFontMetrics( textOption.font ).horizontalAdvance( 'X' ) );
     iconLayoutBounds.setTop( option.rect.y() + ( option.rect.height() - pixmap.height() ) / 2.0 );
     iconLayoutBounds.setHeight( pixmap.height() );
     drawDecoration( painter, iconOption, iconLayoutBounds, pixmap );

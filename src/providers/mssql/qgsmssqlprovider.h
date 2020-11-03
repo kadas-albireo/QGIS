@@ -107,7 +107,7 @@ class QgsMssqlProvider : public QgsVectorDataProvider
 
     bool isSaveAndLoadStyleToDatabaseSupported() const override { return true; }
 
-    bool addFeatures( QgsFeatureList &flist, QgsFeatureSink::Flags flags = nullptr ) override;
+    bool addFeatures( QgsFeatureList &flist, QgsFeatureSink::Flags flags = QgsFeatureSink::Flags() ) override;
 
     bool deleteFeatures( const QgsFeatureIds &id ) override;
 

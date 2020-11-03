@@ -23,7 +23,7 @@
 #include <QMap>
 #include <QPainter>
 #include <QString>
-#include <QTime>
+#include <QElapsedTimer>
 #include <QVariant>
 #include <QVector>
 
@@ -83,7 +83,7 @@ class QgsBench :  public QObject
 
     double mUserStart;
     double mSysStart;
-    QTime mWallTime; // 'wall clock' time
+    QElapsedTimer mWallTime; // 'wall clock' time
 
     // user, sys, total times
     QVector<double *> mTimes;

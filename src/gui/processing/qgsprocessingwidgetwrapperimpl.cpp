@@ -850,7 +850,7 @@ QWidget *QgsProcessingDistanceWidgetWrapper::createWidget()
       mUnitsCombo->addItem( QgsUnitTypes::toString( QgsUnitTypes::DistanceMiles ), QgsUnitTypes::DistanceMiles );
       mUnitsCombo->addItem( QgsUnitTypes::toString( QgsUnitTypes::DistanceYards ), QgsUnitTypes::DistanceYards );
 
-      const int labelMargin = static_cast< int >( std::round( mUnitsCombo->fontMetrics().width( 'X' ) ) );
+      const int labelMargin = static_cast< int >( std::round( mUnitsCombo->fontMetrics().horizontalAdvance( 'X' ) ) );
       QHBoxLayout *layout = new QHBoxLayout();
       layout->addWidget( spin, 1 );
       layout->insertSpacing( 1, labelMargin / 2 );
@@ -1754,7 +1754,7 @@ void QgsProcessingEnumPanelWidget::showDialog()
       availableOptions << i;
   }
 
-  QgsProcessingMultipleSelectionDialog dlg( availableOptions, mValue, this, nullptr );
+  QgsProcessingMultipleSelectionDialog dlg( availableOptions, mValue, this );
   const QStringList options = mParam ? mParam->options() : QStringList();
   dlg.setValueFormatter( [options]( const QVariant & v ) -> QString
   {

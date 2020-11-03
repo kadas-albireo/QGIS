@@ -192,7 +192,7 @@ void QgsFieldConditionalFormatWidget::reloadStyles()
 
   const auto constGetStyles = getStyles();
 
-  const QSize size( Qgis::UI_SCALE_FACTOR * fontMetrics().width( 'X' ) * 10, Qgis::UI_SCALE_FACTOR * fontMetrics().height() * 2 );
+  const QSize size( Qgis::UI_SCALE_FACTOR * fontMetrics().horizontalAdvance( 'X' ) * 10, Qgis::UI_SCALE_FACTOR * fontMetrics().height() * 2 );
   listView->setIconSize( size );
 
   for ( const QgsConditionalStyle &style : constGetStyles )

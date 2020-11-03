@@ -1263,7 +1263,7 @@ QgsLayoutViewSnapMarker::QgsLayoutViewSnapMarker()
 {
   QFont f;
   QFontMetrics fm( f );
-  mSize = fm.width( QStringLiteral( "X" ) );
+  mSize = fm.horizontalAdvance( QStringLiteral( "X" ) );
   setPen( QPen( Qt::transparent, mSize ) );
 
   setFlags( flags() | QGraphicsItem::ItemIgnoresTransformations );

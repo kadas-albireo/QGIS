@@ -246,7 +246,9 @@ bool QgsWfsRequest::sendPOST( const QUrl &url, const QString &contentTypeHeader,
   {
     // Hack for testing purposes
     QUrl modifiedUrl( url );
-    modifiedUrl.addQueryItem( QStringLiteral( "POSTDATA" ), QString::fromUtf8( data ) );
+    QUrlQuery query( url );
+    query.addQueryItem( QStringLiteral( "POSTDATA" ), QString::fromUtf8( data ) );
+    modifiedUrl.setQuery( query );
     return sendGET( modifiedUrl, true, true, false );
   }
 

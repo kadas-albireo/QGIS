@@ -92,7 +92,7 @@ void QgsProcessingMatrixParameterDialog::deleteRow()
   for ( const QModelIndex &i : selected )
     rows << i.row();
 
-  QList< int > rowsToDelete = rows.toList();
+  QList< int > rowsToDelete = rows.values();
   std::sort( rowsToDelete.begin(), rowsToDelete.end(), std::greater<int>() );
   mTblView->setUpdatesEnabled( false );
   for ( int i : qgis::as_const( rowsToDelete ) )
@@ -175,7 +175,7 @@ void QgsProcessingMatrixParameterPanel::setValue( const QVariantList &value )
 
 void QgsProcessingMatrixParameterPanel::showDialog()
 {
-  QgsProcessingMatrixParameterDialog dlg( this, nullptr, mParam, mTable );
+  QgsProcessingMatrixParameterDialog dlg( this, Qt::WindowFlags(), mParam, mTable );
   if ( dlg.exec() )
   {
     setValue( dlg.table() );

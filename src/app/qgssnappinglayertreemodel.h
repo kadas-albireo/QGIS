@@ -68,11 +68,11 @@ class APP_EXPORT QgsSnappingLayerTreeModel : public QSortFilterProxyModel
     QModelIndex parent( const QModelIndex &child ) const override;
     QModelIndex sibling( int row, int column, const QModelIndex &idx ) const override;
     QVariant data( const QModelIndex &index, int role ) const override;
-    bool setData( const QModelIndex &index, const QVariant &value, int role ) override;
+    bool setData( const QModelIndex &idx, const QVariant &value, int role ) override;
 
     QgsLayerTreeModel *layerTreeModel() const;
     void setLayerTreeModel( QgsLayerTreeModel *layerTreeModel );
-    void resetLayerTreeModel() { reset(); }
+    void resetLayerTreeModel() { beginResetModel(); endResetModel(); }
 
     QgsVectorLayer *vectorLayer( const QModelIndex &idx ) const;
 

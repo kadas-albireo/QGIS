@@ -3044,7 +3044,7 @@ void QgsFontMarkerSymbolLayer::startRender( QgsSymbolRenderContext &context )
   mFont.setPixelSize( std::max( 2, static_cast< int >( std::round( sizePixels ) ) ) );
   delete mFontMetrics;
   mFontMetrics = new QFontMetrics( mFont );
-  mChrWidth = mFontMetrics->width( mString );
+  mChrWidth = mFontMetrics->horizontalAdvance( mString );
   mChrOffset = QPointF( mChrWidth / 2.0, -mFontMetrics->ascent() / 2.0 );
   mOrigSize = mSize; // save in case the size would be data defined
 
@@ -3075,7 +3075,7 @@ QString QgsFontMarkerSymbolLayer::characterToRender( QgsSymbolRenderContext &con
     stringToRender = mDataDefinedProperties.valueAsString( QgsSymbolLayer::PropertyCharacter, context.renderContext().expressionContext(), mString );
     if ( stringToRender != mString )
     {
-      charWidth = mFontMetrics->width( stringToRender );
+      charWidth = mFontMetrics->horizontalAdvance( stringToRender );
       charOffset = QPointF( charWidth / 2.0, -mFontMetrics->ascent() / 2.0 );
     }
   }

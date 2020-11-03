@@ -491,7 +491,7 @@ class GUI_EXPORT QgsProcessingToolboxProxyModel: public QSortFilterProxyModel
   private:
 
     QgsProcessingToolboxModel *mModel = nullptr;
-    Filters mFilters = nullptr;
+    Filters mFilters;
     QString mFilterString;
     QPointer<QgsVectorLayer> mInPlaceLayer;
 };

@@ -733,8 +733,8 @@ void QgsDiagramProperties::apply()
 
   if ( diagramsEnabled && 0 == mDiagramAttributesTreeWidget->topLevelItemCount() )
   {
-    QMessageBox::warning(this, tr( "Diagrams: No attributes added." ),
-      tr( "You did not add any attributes to this diagram layer. Please specify the attributes to visualize on the diagrams or disable diagrams." ) );
+    QMessageBox::warning( this, tr( "Diagrams: No attributes added." ),
+                          tr( "You did not add any attributes to this diagram layer. Please specify the attributes to visualize on the diagrams or disable diagrams." ) );
   }
 
   if ( mDiagramType == DIAGRAM_NAME_TEXT )
@@ -873,7 +873,7 @@ void QgsDiagramProperties::apply()
     qFatal( "Invalid settings" );
   }
 
-  QgsDiagramLayerSettings::LinePlacementFlags flags = nullptr;
+  QgsDiagramLayerSettings::LinePlacementFlags flags = QgsDiagramLayerSettings::LinePlacementFlags();
   if ( chkLineAbove->isChecked() )
     flags |= QgsDiagramLayerSettings::AboveLine;
   if ( chkLineBelow->isChecked() )

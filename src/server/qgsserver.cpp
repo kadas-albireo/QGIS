@@ -300,7 +300,7 @@ void QgsServer::putenv( const QString &var, const QString &val )
 void QgsServer::handleRequest( QgsServerRequest &request, QgsServerResponse &response, const QgsProject *project )
 {
   Qgis::MessageLevel logLevel = QgsServerLogger::instance()->logLevel();
-  QTime time; //used for measuring request time if loglevel < 1
+  QElapsedTimer time; //used for measuring request time if loglevel < 1
 
   qApp->processEvents();
 

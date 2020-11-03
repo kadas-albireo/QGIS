@@ -263,7 +263,7 @@ void QgsStatisticalSummaryDockWidget::updateNumericStatistics()
   }
 
   QList< QgsStatisticalSummary::Statistic > statsToDisplay;
-  QgsStatisticalSummary::Statistics statsToCalc = nullptr;
+  QgsStatisticalSummary::Statistics statsToCalc;
   const auto constSDisplayStats = sDisplayStats;
   for ( QgsStatisticalSummary::Statistic stat : constSDisplayStats )
   {
@@ -320,7 +320,7 @@ void QgsStatisticalSummaryDockWidget::updateStringStatistics()
   QVariantList values = mGatherer->values();
 
   QList< QgsStringStatisticalSummary::Statistic > statsToDisplay;
-  QgsStringStatisticalSummary::Statistics statsToCalc = nullptr;
+  QgsStringStatisticalSummary::Statistics statsToCalc;
   const auto constSDisplayStringStats = sDisplayStringStats;
   for ( QgsStringStatisticalSummary::Statistic stat : constSDisplayStringStats )
   {
@@ -445,7 +445,7 @@ void QgsStatisticalSummaryDockWidget::updateDateTimeStatistics()
   QVariantList values = mGatherer->values();
 
   QList< QgsDateTimeStatisticalSummary::Statistic > statsToDisplay;
-  QgsDateTimeStatisticalSummary::Statistics statsToCalc = nullptr;
+  QgsDateTimeStatisticalSummary::Statistics statsToCalc;
   const auto constSDisplayDateTimeStats = sDisplayDateTimeStats;
   for ( QgsDateTimeStatisticalSummary::Statistic stat : constSDisplayDateTimeStats )
   {

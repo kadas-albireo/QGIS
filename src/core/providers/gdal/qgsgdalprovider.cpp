@@ -52,7 +52,6 @@
 #include <QFileInfo>
 #include <QFile>
 #include <QHash>
-#include <QTime>
 #include <QTextDocument>
 #include <QDebug>
 

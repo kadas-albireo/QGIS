@@ -440,7 +440,7 @@ QgsRasterLayerProperties::QgsRasterLayerProperties( QgsMapLayer *lyr, QgsMapCanv
 
 #ifdef WITH_QTWEBKIT
   // Setup information tab
-  const int horizontalDpi = qApp->desktop()->screen()->logicalDpiX();
+  const int horizontalDpi = logicalDpiX();
   // Adjust zoom: text is ok, but HTML seems rather big at least on Linux/KDE
   if ( horizontalDpi > 96 )
   {
@@ -1378,7 +1378,7 @@ void QgsRasterLayerProperties::adjustTransparencyCellWidth( int row, int column 
   QLineEdit *lineEdit = dynamic_cast<QLineEdit *>( tableTransparency->cellWidget( row, column ) );
   if ( !lineEdit ) return;
 
-  int width = std::max( lineEdit->fontMetrics().width( lineEdit->text() ) + 10, 100 );
+  int width = std::max( lineEdit->fontMetrics().horizontalAdvance( lineEdit->text() ) + 10, 100 );
   width = std::max( width, tableTransparency->columnWidth( column ) );
 
   lineEdit->setFixedWidth( width );

@@ -10,6 +10,7 @@
 
 
 
+
 class QgsLayoutPdfExportOptionsDialog: QDialog
 {
 %Docstring
@@ -21,11 +22,16 @@ A dialog for customizing the properties of an exported PDF file from a layout.
 %End
   public:
 
-    QgsLayoutPdfExportOptionsDialog( QWidget *parent = 0, Qt::WindowFlags flags = 0 );
+    QgsLayoutPdfExportOptionsDialog( QWidget *parent = 0,
+                                     bool allowGeoPdfExport = true,
+                                     const QString &geoPdfReason = QString(),
+                                     Qt::WindowFlags flags = Qt::WindowFlags() );
 %Docstring
 Constructor for QgsLayoutPdfExportOptionsDialog
 
 :param parent: parent widget
+:param allowGeoPdfExport: set to ``False`` if geoPdf export is blocked
+:param geoPdfReason: set to a descriptive translated string explaining why geopdf export is not available if applicable
 :param flags: window flags
 %End
 

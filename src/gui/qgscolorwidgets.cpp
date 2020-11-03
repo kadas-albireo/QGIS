@@ -393,7 +393,7 @@ QgsColorWheel::~QgsColorWheel()
 
 QSize QgsColorWheel::sizeHint() const
 {
-  int size = Qgis::UI_SCALE_FACTOR * fontMetrics().width( QStringLiteral( "XXXXXXXXXXXXXXXXXXXXXX" ) );
+  int size = Qgis::UI_SCALE_FACTOR * fontMetrics().horizontalAdvance( QStringLiteral( "XXXXXXXXXXXXXXXXXXXXXX" ) );
   return QSize( size, size );
 }
 
@@ -751,7 +751,7 @@ QgsColorBox::~QgsColorBox()
 
 QSize QgsColorBox::sizeHint() const
 {
-  int size = Qgis::UI_SCALE_FACTOR * fontMetrics().width( QStringLiteral( "XXXXXXXXXXXXXXXXXXXXXX" ) );
+  int size = Qgis::UI_SCALE_FACTOR * fontMetrics().horizontalAdvance( QStringLiteral( "XXXXXXXXXXXXXXXXXXXXXX" ) );
   return QSize( size, size );
 }
 
@@ -982,12 +982,12 @@ QSize QgsColorRampWidget::sizeHint() const
   if ( mOrientation == QgsColorRampWidget::Horizontal )
   {
     //horizontal
-    return QSize( Qgis::UI_SCALE_FACTOR * fontMetrics().width( QStringLiteral( "XXXXXXXXXXXXXXXXXXXXXX" ) ), Qgis::UI_SCALE_FACTOR * fontMetrics().height() * 1.3 );
+    return QSize( Qgis::UI_SCALE_FACTOR * fontMetrics().horizontalAdvance( QStringLiteral( "XXXXXXXXXXXXXXXXXXXXXX" ) ), Qgis::UI_SCALE_FACTOR * fontMetrics().height() * 1.3 );
   }
   else
   {
     //vertical
-    return QSize( Qgis::UI_SCALE_FACTOR * fontMetrics().height() * 1.3, Qgis::UI_SCALE_FACTOR * fontMetrics().width( QStringLiteral( "XXXXXXXXXXXXXXXXXXXXXX" ) ) );
+    return QSize( Qgis::UI_SCALE_FACTOR * fontMetrics().height() * 1.3, Qgis::UI_SCALE_FACTOR * fontMetrics().horizontalAdvance( QStringLiteral( "XXXXXXXXXXXXXXXXXXXXXX" ) ) );
   }
 }
 
@@ -1278,7 +1278,7 @@ QgsColorSliderWidget::QgsColorSliderWidget( QWidget *parent, const ColorComponen
 
   mSpinBox = new QSpinBox();
   //set spinbox to a reasonable width
-  int largestCharWidth = mSpinBox->fontMetrics().width( QStringLiteral( "888%" ) );
+  int largestCharWidth = mSpinBox->fontMetrics().horizontalAdvance( QStringLiteral( "888%" ) );
   mSpinBox->setMinimumWidth( largestCharWidth + 35 );
   mSpinBox->setMinimum( 0 );
   mSpinBox->setMaximum( convertRealToDisplay( componentRange() ) );
@@ -1589,7 +1589,7 @@ void QgsColorPreviewWidget::paintEvent( QPaintEvent *event )
 
 QSize QgsColorPreviewWidget::sizeHint() const
 {
-  return QSize( Qgis::UI_SCALE_FACTOR *  fontMetrics().width( QStringLiteral( "XXXXXXXXXXXXXXXXXXXXXX" ) ), Qgis::UI_SCALE_FACTOR * fontMetrics().width( QStringLiteral( "XXXXXXXXXXXXXXXXXXXXXX" ) ) * 0.75 );
+  return QSize( Qgis::UI_SCALE_FACTOR *  fontMetrics().horizontalAdvance( QStringLiteral( "XXXXXXXXXXXXXXXXXXXXXX" ) ), Qgis::UI_SCALE_FACTOR * fontMetrics().horizontalAdvance( QStringLiteral( "XXXXXXXXXXXXXXXXXXXXXX" ) ) * 0.75 );
 }
 
 void QgsColorPreviewWidget::setColor2( const QColor &color )

@@ -35,7 +35,7 @@ class APP_EXPORT QgsMeshTimeFormatDialog: public QDialog, private Ui::QgsMeshTim
      * \param parent widget
      * \param f window flags
      */
-    QgsMeshTimeFormatDialog( QgsMeshLayer *meshLayer = nullptr, QWidget *parent = nullptr, Qt::WindowFlags f = nullptr );
+    QgsMeshTimeFormatDialog( QgsMeshLayer *meshLayer = nullptr, QWidget *parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags() );
     ~QgsMeshTimeFormatDialog();
 
   private slots:

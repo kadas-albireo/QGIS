@@ -586,7 +586,7 @@ void QgsProjectItemGuiProvider::populateContextMenu( QgsDataItem *item, QMenu *m
       {
         p.accept( &visitor );
         override.release();
-        QgsStyleManagerDialog dlg( &style, QgisApp::instance(), nullptr, true );
+        QgsStyleManagerDialog dlg( &style, QgisApp::instance(), Qt::WindowFlags(), true );
         dlg.setFavoritesGroupVisible( false );
         dlg.setSmartGroupsVisible( false );
         QFileInfo fi( projectPath );

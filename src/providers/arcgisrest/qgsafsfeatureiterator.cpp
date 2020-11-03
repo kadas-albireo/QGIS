@@ -83,7 +83,7 @@ QgsAfsFeatureIterator::QgsAfsFeatureIterator( QgsAfsFeatureSource *source, bool 
     mDeferredFeaturesInFilterRectCheck = true;
   }
 
-  mFeatureIdList = requestIds.toList();
+  mFeatureIdList = requestIds.values();
   std::sort( mFeatureIdList.begin(), mFeatureIdList.end() );
   mRemainingFeatureIds = mFeatureIdList;
   if ( !mRemainingFeatureIds.empty() )
@@ -113,13 +113,13 @@ bool QgsAfsFeatureIterator::fetchFeature( QgsFeature &f )
     QgsFeatureIds featuresInRect = mSource->sharedData()->getFeatureIdsInExtent( mFilterRect, mInterruptionChecker );
     if ( !mFeatureIdList.isEmpty() )
     {
-      QgsFeatureIds requestIds = mFeatureIdList.toSet();
+      QgsFeatureIds requestIds = qgis::listToSet( mFeatureIdList );
       requestIds.intersect( featuresInRect );
-      mFeatureIdList = requestIds.toList();
+      mFeatureIdList = requestIds.values();
     }
     else
     {
-      mFeatureIdList = featuresInRect.toList();
+      mFeatureIdList = featuresInRect.values();
     }
     if ( mFeatureIdList.empty() )
     {

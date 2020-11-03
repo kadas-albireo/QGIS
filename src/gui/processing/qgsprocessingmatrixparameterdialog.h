@@ -43,7 +43,7 @@ class GUI_EXPORT QgsProcessingMatrixParameterDialog : public QDialog, private Ui
     /**
      * Constructor for QgsProcessingMatrixParameterDialog.
      */
-    QgsProcessingMatrixParameterDialog( QWidget *parent SIP_TRANSFERTHIS = nullptr, Qt::WindowFlags flags = nullptr, const QgsProcessingParameterMatrix *param = nullptr,
+    QgsProcessingMatrixParameterDialog( QWidget *parent SIP_TRANSFERTHIS = nullptr, Qt::WindowFlags flags = Qt::WindowFlags(), const QgsProcessingParameterMatrix *param = nullptr,
                                         const QVariantList &initialTable = QVariantList() );
 
     /**

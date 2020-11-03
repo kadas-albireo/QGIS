@@ -100,8 +100,8 @@ void QgsLayoutItemsListView::setCurrentLayout( QgsLayout *layout )
 
   header()->setSectionResizeMode( 0, QHeaderView::Fixed );
   header()->setSectionResizeMode( 1, QHeaderView::Fixed );
-  setColumnWidth( 0, Qgis::UI_SCALE_FACTOR * fontMetrics().width( QStringLiteral( "xxxx" ) ) );
-  setColumnWidth( 1, Qgis::UI_SCALE_FACTOR * fontMetrics().width( QStringLiteral( "xxxx" ) ) );
+  setColumnWidth( 0, Qgis::UI_SCALE_FACTOR * fontMetrics().horizontalAdvance( QStringLiteral( "xxxx" ) ) );
+  setColumnWidth( 1, Qgis::UI_SCALE_FACTOR * fontMetrics().horizontalAdvance( QStringLiteral( "xxxx" ) ) );
   header()->setSectionsMovable( false );
 
   connect( selectionModel(), &QItemSelectionModel::currentChanged, mModel, &QgsLayoutItemsListViewModel::setSelected );

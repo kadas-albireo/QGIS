@@ -834,7 +834,7 @@ void QgsDwgImporter::addLType( const DRW_LType &data )
   setString( dfn, f.get(), QStringLiteral( "name" ), name );
   SETSTRINGPTR( desc );
 
-  QVector<double> path( QVector<double>::fromStdVector( data.path ) );
+  QVector<double> path( data.path.begin(), data.path.end() );
   OGR_F_SetFieldDoubleList( f.get(), OGR_FD_GetFieldIndex( dfn, "path" ), path.size(), path.data() );
 
   QVector<double> upath;

@@ -23,7 +23,6 @@
 #include "qgslogger.h"
 #include "qgsapplication.h"
 
-#include <QTime>
 #include <QMap>
 #include <QByteArray>
 #include <QVariant>

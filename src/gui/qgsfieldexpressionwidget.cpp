@@ -323,7 +323,7 @@ void QgsFieldExpressionWidget::currentFieldChanged()
 
   // display tooltip if widget is shorter than expression
   QFontMetrics metrics( mCombo->lineEdit()->font() );
-  if ( metrics.width( fieldName ) > mCombo->lineEdit()->width() )
+  if ( metrics.horizontalAdvance( fieldName ) > mCombo->lineEdit()->width() )
   {
     mCombo->setToolTip( fieldName );
   }

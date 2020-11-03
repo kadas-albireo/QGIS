@@ -390,7 +390,7 @@ QVariant QgsSnappingLayerTreeModel::data( const QModelIndex &idx, int role ) con
         int n;
         for ( n = 0; !hasChecked || !hasUnchecked; n++ )
         {
-          QVariant v = data( idx.child( n, LayerColumn ), role );
+          QVariant v = data( index( n, LayerColumn, idx ), role );
           if ( !v.isValid() )
             break;
 
@@ -517,16 +517,16 @@ QVariant QgsSnappingLayerTreeModel::data( const QModelIndex &idx, int role ) con
   return QVariant();
 }
 
-bool QgsSnappingLayerTreeModel::setData( const QModelIndex &index, const QVariant &value, int role )
+bool QgsSnappingLayerTreeModel::setData( const QModelIndex &idx, const QVariant &value, int role )
 {
-  if ( index.column() == LayerColumn )
+  if ( idx.column() == LayerColumn )
   {
     if ( role == Qt::CheckStateRole )
     {
       int i = 0;
       for ( i = 0; ; i++ )
       {
-        QModelIndex child = index.child( i, LayerColumn );
+        QModelIndex child = index( i, LayerColumn, idx );
         if ( !child.isValid() )
           break;
 
@@ -535,7 +535,7 @@ bool QgsSnappingLayerTreeModel::setData( const QModelIndex &index, const QVarian
 
       if ( i == 0 )
       {
-        QgsVectorLayer *vl = vectorLayer( index );
+        QgsVectorLayer *vl = vectorLayer( idx );
         if ( !vl || !mIndividualLayerSettings.contains( vl ) )
         {
           return false;
@@ -554,16 +554,16 @@ bool QgsSnappingLayerTreeModel::setData( const QModelIndex &index, const QVarian
         config.setIndividualLayerSettings( vl, ls );
         mProject->setSnappingConfig( config );
       }
-      emit dataChanged( index, index );
+      emit dataChanged( idx, idx );
       return true;
     }
 
-    return mLayerTreeModel->setData( mapToSource( index ), value, role );
+    return mLayerTreeModel->setData( mapToSource( idx ), value, role );
   }
 
-  if ( index.column() == TypeColumn && role == Qt::EditRole )
+  if ( idx.column() == TypeColumn && role == Qt::EditRole )
   {
-    QgsVectorLayer *vl = vectorLayer( index );
+    QgsVectorLayer *vl = vectorLayer( idx );
     if ( vl )
     {
       if ( !mIndividualLayerSettings.contains( vl ) )
@@ -577,14 +577,14 @@ bool QgsSnappingLayerTreeModel::setData( const QModelIndex &index, const QVarian
       QgsSnappingConfig config = mProject->snappingConfig();
       config.setIndividualLayerSettings( vl, ls );
       mProject->setSnappingConfig( config );
-      emit dataChanged( index, index );
+      emit dataChanged( idx, idx );
       return true;
     }
   }
 
-  if ( index.column() == ToleranceColumn && role == Qt::EditRole )
+  if ( idx.column() == ToleranceColumn && role == Qt::EditRole )
   {
-    QgsVectorLayer *vl = vectorLayer( index );
+    QgsVectorLayer *vl = vectorLayer( idx );
     if ( vl )
     {
       if ( !mIndividualLayerSettings.contains( vl ) )
@@ -598,14 +598,14 @@ bool QgsSnappingLayerTreeModel::setData( const QModelIndex &index, const QVarian
       QgsSnappingConfig config = mProject->snappingConfig();
       config.setIndividualLayerSettings( vl, ls );
       mProject->setSnappingConfig( config );
-      emit dataChanged( index, index );
+      emit dataChanged( idx, idx );
       return true;
     }
   }
 
-  if ( index.column() == UnitsColumn && role == Qt::EditRole )
+  if ( idx.column() == UnitsColumn && role == Qt::EditRole )
   {
-    QgsVectorLayer *vl = vectorLayer( index );
+    QgsVectorLayer *vl = vectorLayer( idx );
     if ( vl )
     {
       if ( !mIndividualLayerSettings.contains( vl ) )
@@ -619,14 +619,14 @@ bool QgsSnappingLayerTreeModel::setData( const QModelIndex &index, const QVarian
       QgsSnappingConfig config = mProject->snappingConfig();
       config.setIndividualLayerSettings( vl, ls );
       mProject->setSnappingConfig( config );
-      emit dataChanged( index, index );
+      emit dataChanged( idx, idx );
       return true;
     }
   }
 
-  if ( index.column() == AvoidIntersectionColumn && role == Qt::CheckStateRole )
+  if ( idx.column() == AvoidIntersectionColumn && role == Qt::CheckStateRole )
   {
-    QgsVectorLayer *vl = vectorLayer( index );
+    QgsVectorLayer *vl = vectorLayer( idx );
     if ( vl )
     {
       if ( !mIndividualLayerSettings.contains( vl ) )
@@ -640,7 +640,7 @@ bool QgsSnappingLayerTreeModel::setData( const QModelIndex &index, const QVarian
         avoidIntersectionsList.removeAll( vl );
 
       mProject->setAvoidIntersectionsLayers( avoidIntersectionsList );
-      emit dataChanged( index, index );
+      emit dataChanged( idx, idx );
       return true;
     }
   }

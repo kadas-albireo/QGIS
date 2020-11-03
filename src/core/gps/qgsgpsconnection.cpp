@@ -18,7 +18,6 @@
 #include "qgsgpsconnection.h"
 
 #include <QCoreApplication>
-#include <QTime>
 #include <QIODevice>
 #include <QStringList>
 #include <QFileInfo>

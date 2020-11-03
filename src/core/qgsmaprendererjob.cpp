@@ -16,7 +16,7 @@
 #include "qgsmaprendererjob.h"
 
 #include <QPainter>
-#include <QTime>
+#include <QElapsedTimer>
 #include <QTimer>
 #include <QtConcurrentMap>
 
@@ -106,7 +106,7 @@ bool QgsMapRendererJob::prepareLabelCache() const
     // we may need to clear label cache and re-register labeled features - check for that here
 
     // can we reuse the cached label solution?
-    bool canUseCache = canCache && mCache->dependentLayers( LABEL_CACHE_ID ).toSet() == labeledLayers;
+    bool canUseCache = canCache && qgis::listToSet( mCache->dependentLayers( LABEL_CACHE_ID ) ) == labeledLayers;
     if ( !canUseCache )
     {
       // no - participating layers have changed
@@ -363,7 +363,7 @@ LayerRenderJobs QgsMapRendererJob::prepareJobs( QPainter *painter, QgsLabelingEn
       job.context.setPainter( mypPainter );
     }
 
-    QTime layerTime;
+    QElapsedTimer layerTime;
     layerTime.start();
     job.renderer = ml->createMapRenderer( job.context );
     job.renderingTime = layerTime.elapsed(); // include job preparation time in layer rendering time
@@ -596,7 +596,7 @@ void QgsMapRendererJob::drawLabeling( QgsRenderContext &renderContext, QgsLabeli
 {
   QgsDebugMsgLevel( QStringLiteral( "Draw labeling start" ), 5 );
 
-  QTime t;
+  QElapsedTimer t;
   t.start();
 
   // Reset the composition mode before rendering the labels

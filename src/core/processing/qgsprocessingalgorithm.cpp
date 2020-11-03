@@ -870,7 +870,7 @@ QgsProcessingFeatureSource::Flag QgsProcessingFeatureBasedAlgorithm::sourceFlags
 
 QgsFeatureSink::SinkFlags QgsProcessingFeatureBasedAlgorithm::sinkFlags() const
 {
-  return nullptr;
+  return QgsFeatureSink::SinkFlags();
 }
 
 QgsWkbTypes::Type QgsProcessingFeatureBasedAlgorithm::outputWkbType( QgsWkbTypes::Type inputWkbType ) const

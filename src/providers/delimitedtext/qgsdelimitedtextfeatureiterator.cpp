@@ -154,8 +154,8 @@ QgsDelimitedTextFeatureIterator::QgsDelimitedTextFeatureIterator( QgsDelimitedTe
     QgsAttributeList attrs = request.subsetOfAttributes();
     //ensure that all fields required for filter expressions are prepared
     QSet<int> attributeIndexes = request.filterExpression()->referencedAttributeIndexes( mSource->mFields );
-    attributeIndexes += attrs.toSet();
-    mRequest.setSubsetOfAttributes( attributeIndexes.toList() );
+    attributeIndexes += qgis::listToSet( attrs );
+    mRequest.setSubsetOfAttributes( attributeIndexes.values() );
   }
   // also need attributes required by order by
   if ( mRequest.flags() & QgsFeatureRequest::SubsetOfAttributes && !mRequest.orderBy().isEmpty() )
@@ -536,10 +536,12 @@ QgsDelimitedTextFeatureSource::QgsDelimitedTextFeatureSource( const QgsDelimited
   QUrl url = p->mFile->url();
 
   // make sure watcher not created when using iterator (e.g. for rendering, see issue #15558)
-  if ( url.hasQueryItem( QStringLiteral( "watchFile" ) ) )
+  QUrlQuery query( url );
+  if ( query.hasQueryItem( QStringLiteral( "watchFile" ) ) )
   {
-    url.removeQueryItem( QStringLiteral( "watchFile" ) );
+    query.removeQueryItem( QStringLiteral( "watchFile" ) );
   }
+  url.setQuery( query );
 
   mFile.reset( new QgsDelimitedTextFile() );
   mFile->setFromUrl( url );

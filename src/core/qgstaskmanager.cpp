@@ -497,7 +497,7 @@ QgsTask *QgsTaskManager::task( long id ) const
 QList<QgsTask *> QgsTaskManager::tasks() const
 {
   QMutexLocker ml( mTaskMutex );
-  return mParentTasks.toList();
+  return mParentTasks.values();
 }
 
 int QgsTaskManager::count() const
@@ -640,7 +640,7 @@ QList<QgsTask *> QgsTaskManager::activeTasks() const
   QMutexLocker ml( mTaskMutex );
   QSet< QgsTask * > activeTasks = mActiveTasks;
   activeTasks.intersect( mParentTasks );
-  return activeTasks.toList();
+  return activeTasks.values();
 }
 
 int QgsTaskManager::countActiveTasks() const
@@ -685,8 +685,11 @@ void QgsTaskManager::taskStatusChanged( int status )
   mTaskMutex->lock();
   QgsTaskRunnableWrapper *runnable = mTasks.value( id ).runnable;
   mTaskMutex->unlock();
-  if ( runnable )
-    QThreadPool::globalInstance()->cancel( runnable );
+  if ( runnable && QThreadPool::globalInstance()->tryTake( runnable ) )
+  {
+    delete runnable;
+    mTasks[ id ].runnable = nullptr;
+  }
 
   if ( status == QgsTask::Terminated || status == QgsTask::Complete )
   {
@@ -789,8 +792,12 @@ bool QgsTaskManager::cleanupAndDeleteTask( QgsTask *task )
   }
   else
   {
-    if ( runnable )
-      QThreadPool::globalInstance()->cancel( runnable );
+    if ( runnable && QThreadPool::globalInstance()->tryTake( runnable ) )
+    {
+      delete runnable;
+      mTasks[ id ].runnable = nullptr;
+    }
+
     if ( isParent )
     {
       //task already finished, kill it

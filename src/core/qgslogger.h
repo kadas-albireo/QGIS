@@ -22,7 +22,7 @@
 #include "qgis_sip.h"
 #include <sstream>
 #include <QString>
-#include <QTime>
+#include <QElapsedTimer>
 
 #include "qgis_core.h"
 #include "qgsconfig.h"
@@ -125,7 +125,7 @@ class CORE_EXPORT QgsLogger
     static int sPrefixLength;
     static QString sLogFile;
     static QString sFileFilter;
-    static QTime sTime;
+    static QElapsedTimer sTime;
 };
 
 /**

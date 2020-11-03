@@ -42,7 +42,7 @@ QgsLayoutItemPage::QgsLayoutItemPage( QgsLayout *layout )
 
   QFont font;
   QFontMetrics fm( font );
-  mMaximumShadowWidth = fm.width( QStringLiteral( "X" ) );
+  mMaximumShadowWidth = fm.horizontalAdvance( QStringLiteral( "X" ) );
 
   mGrid.reset( new QgsLayoutItemPageGrid( pos().x(), pos().y(), rect().width(), rect().height(), mLayout ) );
   mGrid->setParentItem( this );
@@ -108,7 +108,6 @@ QPageLayout QgsLayoutItemPage::pageLayout() const
   pageLayout.setMode( QPageLayout::FullPageMode );
   double factor = 1.;
 
-  QPageSize::Unit unit;
   switch ( pageSize().units() )
   {
     case QgsUnitTypes::LayoutMillimeters:

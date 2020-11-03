@@ -791,7 +791,7 @@ QgsLayoutDesignerDialog::QgsLayoutDesignerDialog( QWidget *parent, Qt::WindowFla
   mMenuProvider = new QgsLayoutAppMenuProvider( iface() );
   mView->setMenuProvider( mMenuProvider );
 
-  int minDockWidth( fontMetrics().width( QStringLiteral( "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" ) ) );
+  int minDockWidth( fontMetrics().horizontalAdvance( QStringLiteral( "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" ) ) );
 
   setTabPosition( Qt::AllDockWidgetAreas, QTabWidget::North );
   mGeneralDock = new QgsDockWidget( tr( "Layout" ), this );
@@ -2572,7 +2572,7 @@ void QgsLayoutDesignerDialog::printAtlas()
     // whereas on Linux we must allow for far more iterations.
     // For safety limit the number of iterations
     int nIters = 0;
-    while ( QCoreApplication::hasPendingEvents() && ++nIters < 100 )
+    while ( ++nIters < 100 )
 #endif
     {
       QCoreApplication::processEvents();
@@ -2756,7 +2756,7 @@ void QgsLayoutDesignerDialog::exportAtlasToRaster()
     // whereas on Linux we must allow for far more iterations.
     // For safety limit the number of iterations
     int nIters = 0;
-    while ( QCoreApplication::hasPendingEvents() && ++nIters < 100 )
+    while ( ++nIters < 100 )
 #endif
     {
       QCoreApplication::processEvents();
@@ -2913,7 +2913,7 @@ void QgsLayoutDesignerDialog::exportAtlasToSvg()
     // whereas on Linux we must allow for far more iterations.
     // For safety limit the number of iterations
     int nIters = 0;
-    while ( QCoreApplication::hasPendingEvents() && ++nIters < 100 )
+    while ( ++nIters < 100 )
 #endif
     {
       QCoreApplication::processEvents();
@@ -3127,7 +3127,7 @@ void QgsLayoutDesignerDialog::exportAtlasToPdf()
     // whereas on Linux we must allow for far more iterations.
     // For safety limit the number of iterations
     int nIters = 0;
-    while ( QCoreApplication::hasPendingEvents() && ++nIters < 100 )
+    while ( ++nIters < 100 )
 #endif
     {
       QCoreApplication::processEvents();
@@ -3262,7 +3262,7 @@ void QgsLayoutDesignerDialog::exportReportToRaster()
     // whereas on Linux we must allow for far more iterations.
     // For safety limit the number of iterations
     int nIters = 0;
-    while ( QCoreApplication::hasPendingEvents() && ++nIters < 100 )
+    while ( ++nIters < 100 )
 #endif
     {
       QCoreApplication::processEvents();
@@ -3380,7 +3380,7 @@ void QgsLayoutDesignerDialog::exportReportToSvg()
     // whereas on Linux we must allow for far more iterations.
     // For safety limit the number of iterations
     int nIters = 0;
-    while ( QCoreApplication::hasPendingEvents() && ++nIters < 100 )
+    while ( ++nIters < 100 )
 #endif
     {
       QCoreApplication::processEvents();
@@ -3517,7 +3517,7 @@ void QgsLayoutDesignerDialog::exportReportToPdf()
     // whereas on Linux we must allow for far more iterations.
     // For safety limit the number of iterations
     int nIters = 0;
-    while ( QCoreApplication::hasPendingEvents() && ++nIters < 100 )
+    while ( ++nIters < 100 )
 #endif
     {
       QCoreApplication::processEvents();
@@ -3624,7 +3624,7 @@ void QgsLayoutDesignerDialog::printReport()
     // whereas on Linux we must allow for far more iterations.
     // For safety limit the number of iterations
     int nIters = 0;
-    while ( QCoreApplication::hasPendingEvents() && ++nIters < 100 )
+    while ( ++nIters < 100 )
 #endif
     {
       QCoreApplication::processEvents();

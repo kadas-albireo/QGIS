@@ -260,7 +260,7 @@ class CORE_EXPORT QgsFeatureRenderer
      *     skip_the_curren_feature()
      * \endcode
      */
-    virtual QgsFeatureRenderer::Capabilities capabilities() { return nullptr; }
+    virtual QgsFeatureRenderer::Capabilities capabilities() { return QgsFeatureRenderer::Capabilities(); }
 
     /**
      * Returns list of symbols used by the renderer.

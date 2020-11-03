@@ -22,7 +22,7 @@
 #include <QColor>
 #include <QPainter>
 #include <QImage>
-#include <QTime>
+#include <QElapsedTimer>
 #include <QCryptographicHash>
 #include <QByteArray>
 #include <QDebug>
@@ -184,7 +184,7 @@ bool QgsRenderChecker::runTest( const QString &testName,
   mMapSettings.setFlag( QgsMapSettings::Antialiasing );
   mMapSettings.setOutputSize( QSize( myExpectedImage.width(), myExpectedImage.height() ) / mMapSettings.devicePixelRatio() );
 
-  QTime myTime;
+  QElapsedTimer myTime;
   myTime.start();
 
   QgsMapRendererSequentialJob job( mMapSettings );
