@@ -45,8 +45,8 @@ class QgsCoordinateReferenceSystemPrivate;
 struct PJconsts;
 typedef struct PJconsts PJ;
 
-struct projCtx_t;
-typedef struct projCtx_t PJ_CONTEXT;
+struct pj_ctx;
+typedef struct pj_ctx PJ_CONTEXT;
 
 #endif
 #endif

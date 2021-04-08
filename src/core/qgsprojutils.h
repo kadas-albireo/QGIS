@@ -145,8 +145,8 @@ class CORE_EXPORT QgsProjUtils
 #ifndef SIP_RUN
 
 #if PROJ_VERSION_MAJOR>=6
-struct projCtx_t;
-typedef struct projCtx_t PJ_CONTEXT;
+struct pj_ctx;
+typedef struct pj_ctx PJ_CONTEXT;
 #else
 typedef void PJ_CONTEXT;
 #endif
