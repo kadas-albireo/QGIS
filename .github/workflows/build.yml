@@ -47,7 +47,7 @@ jobs:
           (cd $debugroot && zip -r - *) > qgis-portable-win64-debugsym.zip
       - name: Create release
         id: create_release
-        uses: actions/create-release@v1.0.0
+        uses: actions/create-release@v1.1.4
         env:
           # We use a personal access token, because GITHUB_CI_TOKEN is valid only for one hour
           GITHUB_TOKEN: ${{ secrets.GITHUB_PRIVATE_TOKEN }}
